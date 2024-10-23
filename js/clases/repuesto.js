@@ -71,6 +71,6 @@ class Repuesto {
 
 }
 
-/* Exportando la Clase Repuesto al main */
+/* Exportando la Clase Repuesto al main.js */
 
 export {Repuesto};

@@ -16,6 +16,7 @@ const cerrarSesionText = "Cerrar Sesión";
 const loginText = "Iniciar Sesión";
 const invitadoText = "Usuario: Invitado";
 
+
 /* ---- Creaciones de varios Productos ---- */
 
 const repuesto1 = new Repuesto(1, "Retrovisores", 2011, "Astra", 123.55, 15, "https://http2.mlstatic.com/D_NQ_NP_707465-MLA75573563840_042024-O.webp");
