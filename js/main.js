@@ -8,7 +8,7 @@ const loginButton = document.getElementById('loginButton');
 const pUserName = document.getElementById('pUserName');
 const botonAgregarCarrito = document.getElementsByClassName('btnAgregarProductoCarrito');
 const botonCarrito = document.getElementById('btnCarrito');
-
+const repuestos = [];
 let usuario;
 let password;
 
@@ -29,7 +29,7 @@ const repuesto8 = new Repuesto(8, "Puerta delantera acompañante", 2011, "Astra"
 
 /* ---- Objetos ---- */
 
-const repuestos = [repuesto1, repuesto2, repuesto3, repuesto4, repuesto5, repuesto6, repuesto7, repuesto8];
+repuestos = [repuesto1, repuesto2, repuesto3, repuesto4, repuesto5, repuesto6, repuesto7, repuesto8];
 
 /* ---- Funciones ---- */
 
