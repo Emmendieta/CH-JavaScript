@@ -153,7 +153,7 @@ body {
 
 .ftBottom {
     display: flex;
-    border-top: 3px gray solid;
+    border-top: 3px gray solid; 
     border-radius: 15px;
     align-items: center;
     justify-content: center;

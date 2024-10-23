@@ -1,6 +1,6 @@
 //Clase de Repuesto:
 
-import { Repuesto } from "./clases/repuesto.js"; 
+import { Repuesto } from "./clases/repuesto.js";  
 
 /* --- Constantes y variables ---- */
 
@@ -15,7 +15,6 @@ let password;
 const cerrarSesionText = "Cerrar Sesión";
 const loginText = "Iniciar Sesión";
 const invitadoText = "Usuario: Invitado";
-
 
 /* ---- Creaciones de varios Productos ---- */
 
