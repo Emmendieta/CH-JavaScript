@@ -90,7 +90,7 @@ function obtenerCodigoMax() {
 export function listarRepuestos() {
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
     let devolverBDRepuesto = [];
-    if (recuperarBaseDeDatosRepuesto.length === 0) {
+    if (!recuperarBaseDeDatosRepuesto || recuperarBaseDeDatosRepuesto.length === 0) {
         devolverBDRepuesto = crearBDRepuestos();
         return devolverBDRepuesto;
     } else {
