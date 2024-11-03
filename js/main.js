@@ -342,7 +342,7 @@ function repuestosConFiltro() {
 
 // Evento de Filtar Repuestos:
 
-btnBuscarProducto.addEventListener('click', () => {
+btnBuscarProducto.addEventListener('click', (event) => {
     if (btnBuscarProducto.textContent === btnTextBuscarBuscar) {
         //Evita que se recargue la pagina de forma completa!
         event.preventDefault();
@@ -390,7 +390,7 @@ function deshabilitarBotonesEdicionEliminarProductos() {
         });
         mnSectArtAdd.style.display = 'none';
     }
-    
+
 }
 
 

@@ -88,28 +88,15 @@ function obtenerCodigoMax() {
 // Devuelve lista de Repuestos:
 
 export function listarRepuestos() {
-    // Recuperar la base de datos de repuestos desde localStorage
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
-    
-    // Verificar si la base de datos es null o no es un array
+    //Verifico si la base de datos es null o no es un array
     if (!Array.isArray(recuperarBaseDeDatosRepuesto)) {
-        return crearBDRepuestos(); // Si no existe o no es un array, crear la base de datos
+        //Si no existe o no es un array, crear la base de datos
+        return crearBDRepuestos(); 
     } else {
-        return recuperarBaseDeDatosRepuesto; // Devolver la base de datos recuperada
+        return recuperarBaseDeDatosRepuesto; 
     }
 }
-
-/* export function listarRepuestos() {
-    const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
-    let devolverBDRepuesto = [];
-    if (!recuperarBaseDeDatosRepuesto || recuperarBaseDeDatosRepuesto.length === 0) {
-        devolverBDRepuesto = crearBDRepuestos();
-        return devolverBDRepuesto;
-    } else {
-        devolverBDRepuesto = recuperarBaseDeDatosRepuesto;
-        return devolverBDRepuesto;
-    }
-} */
 
 // Devuelve una Lista de Repuesto pero filtandola con el Buscador:
 
