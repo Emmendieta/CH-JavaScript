@@ -84,3 +84,26 @@ function obtenerCodigoMax() {
     const recuperarBDInvertida = recuperarBaseDeDatosRepuesto.sort((elementoA, elementoB) => elementoB.codigo, elementoA.codigo);
     return recuperarBDInvertida[0].codigo;
 }
+
+// Devuelve lista de Repuestos:
+
+export function listarRepuestos() {
+    const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
+    let devolverBDRepuesto = [];
+    if (recuperarBaseDeDatosRepuesto.length === 0) {
+        devolverBDRepuesto = crearBDRepuestos();
+        return devolverBDRepuesto;
+    } else {
+        devolverBDRepuesto = recuperarBaseDeDatosRepuesto;
+        return devolverBDRepuesto;
+    }
+}
+
+// Devuelve una Lista de Repuesto pero filtandola con el Buscador:
+
+export function listarRepuestosConFiltro(nombreBuscar) {
+    const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
+    const listaRepuestosConFiltro = recuperarBaseDeDatosRepuesto.filter((repuesto) => repuesto.nombre.includes(nombreBuscar));
+    return listaRepuestosConFiltro;
+}
+

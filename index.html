@@ -35,8 +35,8 @@
                 </section>
                 <section>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        <input class="form-control me-2" type="search" placeholder="Buscar Por Nombre" aria-label="Search" id="textoBuscadorRepuesto">
+                        <button class="btn btn-outline-success" type="submit" id="btnBuscarRepuesto">Buscar</button>
                     </form>
                 </section>
                 <section id="hdNavSectionLogin">
@@ -59,6 +59,9 @@
                 <!-- Titulo -->
                 <h1 class="mnSectArtTitulo">Repuestos:</h1>
             </article>
+            <article class="mnSectArtAdd">
+                <button type="button" class="btn btn-success btnAddRepuesto">Agregar Repuesto</button>
+            </article>
             <article class="mnSectArtRepuestos">
                 <div class="card" style="width: 18rem;">
                     <div class="d-flex justify-content-center">
@@ -72,112 +75,15 @@
                         <p class="card-text" id="modeloRepuesto0">modelo del Repuesto.</p>
                         <p class="card-text" id="precioRepuesto0">precio del Repuesto.</p>
                         <p class="card-text" id="cantidadRepuesto0">cantidad del Repuesto.</p>
-                        <a href="#" class="btn btn-secondary btnAgregarProductoCarrito">Agregar a Carrito</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="d-flex justify-content-center">
-                        <img src="images/Imagen-no-disponible.png" class="card-img-top" id="imgRepuesto1"
-                            alt="imgRepuesto">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="nombreRepuesto1">nombre Repuesto.</h5>
-                        <p class="card-text" id="codigoRepuesto1">codigo del Repuesto.</p>
-                        <p class="card-text" id="vehiculoRepuesto1">vehiculo del Repuesto.</p>
-                        <p class="card-text" id="modeloRepuesto1">modelo del Repuesto.</p>
-                        <p class="card-text" id="precioRepuesto1">precio del Repuesto.</p>
-                        <p class="card-text" id="cantidadRepuesto1">cantidad del Repuesto.</p>
-                        <a href="#" class="btn btn-secondary btnAgregarProductoCarrito">Agregar a Carrito</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="d-flex justify-content-center">
-                        <img src="images/Imagen-no-disponible.png" class="card-img-top" id="imgRepuesto2"
-                            alt="imgRepuesto">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="nombreRepuesto2">nombre Repuesto.</h5>
-                        <p class="card-text" id="codigoRepuesto2">codigo del Repuesto.</p>
-                        <p class="card-text" id="vehiculoRepuesto2">vehiculo del Repuesto.</p>
-                        <p class="card-text" id="modeloRepuesto2">modelo del Repuesto.</p>
-                        <p class="card-text" id="precioRepuesto2">precio del Repuesto.</p>
-                        <p class="card-text" id="cantidadRepuesto2">cantidad del Repuesto.</p>
-                        <a href="#" class="btn btn-secondary btnAgregarProductoCarrito">Agregar a Carrito</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="d-flex justify-content-center">
-                        <img src="images/Imagen-no-disponible.png" class="card-img-top" id="imgRepuesto3"
-                            alt="imgRepuesto">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="nombreRepuesto3">nombre Repuesto.</h5>
-                        <p class="card-text" id="codigoRepuesto3">codigo del Repuesto.</p>
-                        <p class="card-text" id="vehiculoRepuesto3">vehiculo del Repuesto.</p>
-                        <p class="card-text" id="modeloRepuesto3">modelo del Repuesto.</p>
-                        <p class="card-text" id="precioRepuesto3">precio del Repuesto.</p>
-                        <p class="card-text" id="cantidadRepuesto3">cantidad del Repuesto.</p>
-                        <a href="#" class="btn btn-secondary btnAgregarProductoCarrito">Agregar a Carrito</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="d-flex justify-content-center">
-                        <img src="images/Imagen-no-disponible.png" class="card-img-top" id="imgRepuesto4"
-                            alt="imgRepuesto">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="nombreRepuesto4">nombre Repuesto.</h5>
-                        <p class="card-text" id="codigoRepuesto4">codigo del Repuesto.</p>
-                        <p class="card-text" id="vehiculoRepuesto4">vehiculo del Repuesto.</p>
-                        <p class="card-text" id="modeloRepuesto4">modelo del Repuesto.</p>
-                        <p class="card-text" id="precioRepuesto4">precio del Repuesto.</p>
-                        <p class="card-text" id="cantidadRepuesto4">cantidad del Repuesto.</p>
-                        <a href="#" class="btn btn-secondary btnAgregarProductoCarrito">Agregar a Carrito</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="d-flex justify-content-center">
-                        <img src="images/Imagen-no-disponible.png" class="card-img-top" id="imgRepuesto5"
-                            alt="imgRepuesto">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="nombreRepuesto5">nombre Repuesto.</h5>
-                        <p class="card-text" id="codigoRepuesto5">codigo del Repuesto.</p>
-                        <p class="card-text" id="vehiculoRepuesto5">vehiculo del Repuesto.</p>
-                        <p class="card-text" id="modeloRepuesto5">modelo del Repuesto.</p>
-                        <p class="card-text" id="precioRepuesto5">precio del Repuesto.</p>
-                        <p class="card-text" id="cantidadRepuesto5">cantidad del Repuesto.</p>
-                        <a href="#" class="btn btn-secondary btnAgregarProductoCarrito">Agregar a Carrito</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="d-flex justify-content-center">
-                        <img src="images/Imagen-no-disponible.png" class="card-img-top" id="imgRepuesto6"
-                            alt="imgRepuesto">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="nombreRepuesto6">nombre Repuesto.</h5>
-                        <p class="card-text" id="codigoRepuesto6">codigo del Repuesto.</p>
-                        <p class="card-text" id="vehiculoRepuesto6">vehiculo del Repuesto.</p>
-                        <p class="card-text" id="modeloRepuesto6">modelo del Repuesto.</p>
-                        <p class="card-text" id="precioRepuesto6">precio del Repuesto.</p>
-                        <p class="card-text" id="cantidadRepuesto6">cantidad del Repuesto.</p>
-                        <a href="#" class="btn btn-secondary btnAgregarProductoCarrito">Agregar a Carrito</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <div class="d-flex justify-content-center">
-                        <img src="images/Imagen-no-disponible.png" class="card-img-top" id="imgRepuesto7"
-                            alt="imgRepuesto">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="nombreRepuesto7">nombre Repuesto.</h5>
-                        <p class="card-text" id="codigoRepuesto7">codigo del Repuesto.</p>
-                        <p class="card-text" id="vehiculoRepuesto7">vehiculo del Repuesto.</p>
-                        <p class="card-text" id="modeloRepuesto7">modelo del Repuesto.</p>
-                        <p class="card-text" id="precioRepuesto7">precio del Repuesto.</p>
-                        <p class="card-text" id="cantidadRepuesto7">cantidad del Repuesto.</p>
-                        <a href="#" class="btn btn-secondary btnAgregarProductoCarrito">Agregar a Carrito</a>
+                        <div class="card-body-botones">
+                            <div class="card-boyd-btnEdition">
+                                <button class="btn btn-outline-success btnEditProducto" data-indice=""><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="btn btn-outline-danger btnDeleteProducto" data-indice=""><i class="fa-regular fa-circle-xmark"></i></button>
+                            </div>
+                            <div class="card-body-btnAgregar">
+                                <button class="btn btn-success btnAgregarProductoCarrito" data-indice="">Agregar al carrito</button>
+                            </div>
+                        </div>                 
                     </div>
                 </div>
             </article>
@@ -190,6 +96,7 @@
 
             </article>
             <article class="mnSectCarritoFinalizar">
+                <!-- <button type="button" class="btn btn-info">Finalizar Carrito</button> -->
                 <button type="button" class="btn btn-danger" id="btnCarrito">Finalizar Carrito</button>
                 <i class="fa-solid fa-cart-shopping fa-xl" id="iconoCarrito"></i>
             </article>

@@ -72,6 +72,12 @@ body {
     text-shadow: 5px 2px 5px grey;
 }
 
+.mnSectArtAdd {
+    display: none;
+    justify-content: end;
+    margin: 27px;
+}
+
 .mnSectArtRepuestos{
     display: flex;
     flex-wrap: wrap;
@@ -104,8 +110,21 @@ body {
 }
 
 .btnAgregarProductoCarrito {
-    pointer-events: none;
     opacity: 0.5;
+}
+
+
+.card-body-botones {
+    display: flex;  
+    justify-content: space-between;
+}
+
+.btnEdition {
+    display: flex;
+}
+
+.btnEditProducto, .btnDeleteProducto, .btnAgregarProductoCarrito {
+    margin: 5px 3px;
 }
 
 /* main carrito */
@@ -124,10 +143,10 @@ body {
     opacity: 0.5;
 }
 
-.btn-danger {
+#btnCarrito {
     margin: 15px;
-    pointer-events: none;
-    opacity: 0.4;
+    /* pointer-events: none; */
+    opacity: 0.5;
 }
 
 /* Modal Registrarse */
