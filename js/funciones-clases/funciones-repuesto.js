@@ -78,7 +78,7 @@ function verificarExistenciaRepuesto(repuesto) {
 
 function obtenerCodigoMax() {
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
-    if (recuperarBDRepuestos.length === 0) {
+    if (recuperarBaseDeDatosRepuesto.length === 0) {
         crearBDRepuestos(); 
     }
     const recuperarBDInvertida = recuperarBaseDeDatosRepuesto.sort((elementoA, elementoB) => elementoB.codigo, elementoA.codigo);
@@ -88,6 +88,18 @@ function obtenerCodigoMax() {
 // Devuelve lista de Repuestos:
 
 export function listarRepuestos() {
+    // Recuperar la base de datos de repuestos desde localStorage
+    const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
+    
+    // Verificar si la base de datos es null o no es un array
+    if (!Array.isArray(recuperarBaseDeDatosRepuesto)) {
+        return crearBDRepuestos(); // Si no existe o no es un array, crear la base de datos
+    } else {
+        return recuperarBaseDeDatosRepuesto; // Devolver la base de datos recuperada
+    }
+}
+
+/* export function listarRepuestos() {
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
     let devolverBDRepuesto = [];
     if (!recuperarBaseDeDatosRepuesto || recuperarBaseDeDatosRepuesto.length === 0) {
@@ -97,7 +109,7 @@ export function listarRepuestos() {
         devolverBDRepuesto = recuperarBaseDeDatosRepuesto;
         return devolverBDRepuesto;
     }
-}
+} */
 
 // Devuelve una Lista de Repuesto pero filtandola con el Buscador:
 
