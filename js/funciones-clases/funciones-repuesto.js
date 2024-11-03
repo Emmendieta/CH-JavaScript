@@ -60,7 +60,7 @@ export function altaRepuesto(repuesto) {
 
 function verificarExistenciaRepuesto(repuesto) {
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
-    if (recuperarBDRepuestos.length === 0) {
+    if (recuperarBaseDeDatosRepuesto.length === 0) {
         crearBDRepuestos();
     }
     if (repuesto.codigoRepuesto === NaN || repuesto.codigoRepuesto < 0) { alert ("Error: No se puedo leer correctamente el código del Repuesto!"); } else {
