@@ -121,6 +121,7 @@ body {
     color: orange;
     transform: scale(1.5);
     margin-right: 10px;
+    opacity: 0.5;
 }
 
 .btn-danger {

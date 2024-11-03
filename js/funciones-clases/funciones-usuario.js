@@ -48,13 +48,16 @@ export function altaUsuario(usuario) {
             usuario.nombreUsuario.toLowerCase(),
             usuario.password,
             usuario.esAdmin
-        );
-    
+        );    
         baseDeDatosUsuario.push(nuevoUsuario);
         console.log("Usuario agregado:", nuevoUsuario);
         console.log("Base de datos actualizada:", baseDeDatosUsuario);    
         localStorage.setItem("baseDeDatosUsuario", JSON.stringify(baseDeDatosUsuario));
-    } else { alert("Error: El nombre de usuario que intenta crear ya existe o el email ya se encuentra registrado!"); }
+        return true;
+    } else { 
+        alert("Error: El nombre de usuario que intenta crear ya existe o el email ya se encuentra registrado!"); 
+        return false;
+    }
 }
 
 // Verificar si existe un Usuario:

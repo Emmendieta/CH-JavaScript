@@ -35,8 +35,10 @@ const modalSingUpButton = document.getElementById('btnModalSingUp');
 
 
 const pUserName = document.getElementById('pUserName');
-const botonAgregarCarrito = document.getElementsByClassName('btnAgregarProductoCarrito');
+const botonesAgregarCarrito = document.querySelectorAll('.btnAgregarProductoCarrito');
 const botonCarrito = document.getElementById('btnCarrito');
+const iconoCarrito = document.getElementById('iconoCarrito');
+
 // Se configuro repuestos como let porque con const no me trae los valores de cada repuesto
 let repuestos = [];
 
@@ -102,6 +104,7 @@ function validarLogin() {
             textoBotonLogin();
             mostarOcultarBotonSingUp();
             cambiarTextoUsuarioRegistrado(usuarioValidado);
+            habilitarDeshabilitarBotonesEnLogin();  
             const modal = bootstrap.Modal.getInstance(modalLogin);
             modal.hide();
         } else {alert ("Error: Por favor verifique el nombre de usuario y/o password!");}
@@ -141,6 +144,7 @@ loginButton.addEventListener('click', () => {
         nuevoModalLogin.show();
     } else if (loginButton.textContent === cerrarSesionText) {
         textoBotonLogin();
+        habilitarDeshabilitarBotonesEnLogin();
     } else { alert("Error: No se pudo procesar correctamente el evento del Click! Por favor intente nuevamente!");}
 })
 
@@ -153,6 +157,31 @@ modalBtnLogin.addEventListener('click', () => {
 function limpiarModalLogin() {
     modalLoginNombreUsuario.value = "";
     modalLoginPassword.value = "";
+}
+
+// Funcion Habilitar botones de "Agregar" y del "Carrito":
+
+function habilitarDeshabilitarBotonesEnLogin() {
+    if (pUserName.textContent === invitadoText) {
+        botonesAgregarCarrito.forEach((boton) => {
+            boton.disabled = true;
+            boton.style.opacity = 0.5;
+        });
+        botonCarrito.disabled = true;
+        botonCarrito.style.opacity = 0.5;
+        iconoCarrito.disabled = true;
+        iconoCarrito.style.opacity = 0.5;
+    }
+    else {
+        botonesAgregarCarrito.forEach((boton) => {
+            boton.disabled = false;
+            boton.style.opacity = 1;
+        });
+        botonCarrito.disabled = false;
+        botonCarrito.style.opacity = 1;
+        iconoCarrito.disabled = false;
+        iconoCarrito.style.opacity = 1;
+    }
 }
 
 /* ---------------- SING UP ---------------- */
@@ -188,15 +217,16 @@ function validarSignUp() {
                                                     modalInputCiudad.value,
                                                     modalInputProvincia.value,
                                                     modalInputPais.value,
-                                                    modalInputNombreUsuario.value,
+                                                    modalInputNombreUsuario.value.toLowerCase(),
                                                     modalInputPassword.value,
                                                     false 
                                                 );
-                                                altaUsuario(nuevoUsuario);
-                                                limpiarDatosModalSingUp();
-                                                alert(`Felicidades! se ha dado de alta al usuario ${nuevoUsuario.nombreUsuario}!`);
-                                                const modal = bootstrap.Modal.getInstance(modalSignUp);
-                                                modal.hide();
+                                                if (altaUsuario(nuevoUsuario) === true) {
+                                                    limpiarDatosModalSingUp();
+                                                    alert(`Felicidades! se ha dado de alta al usuario ${nuevoUsuario.nombreUsuario}!`);
+                                                    const modal = bootstrap.Modal.getInstance(modalSignUp);
+                                                    modal.hide();
+                                                } else {}
                                             } else { alert("Error: Por favor, verifique su contraseña y la confirmación de su contraseña ya que no son iguales!"); }
                                         } else { alert(" Error: La confirmación de su contraseña no puede ser nula y/o tiene que tener al menos un número, una mayúscula y una minúscula!") }
                                     } else {alert("Error: Su contraseña no puede ser nula y/o tiene que tener al menos un número, una mayúscula y una minúscula!"); }
