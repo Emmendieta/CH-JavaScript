@@ -390,6 +390,7 @@ function deshabilitarBotonesEdicionEliminarProductos() {
         });
         mnSectArtAdd.style.display = 'none';
     }
+    
 }
 
 
