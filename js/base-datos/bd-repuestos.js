@@ -1,0 +1,1 @@
+export let baseDeDatosRepuestos = JSON.parse(localStorage.getItem("baseDeDatosRepuesto")) || [];

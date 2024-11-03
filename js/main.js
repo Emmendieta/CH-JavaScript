@@ -3,6 +3,7 @@
 import { Repuesto } from "./clases/repuesto.js";
 import { Usuario } from "./clases/usuario.js";
 import { altaUsuario, inicializarBaseDatosUsuario, recuperarUsuarioDeBD } from "./funciones-clases/funciones-usuario.js";
+import { recuperarBDRepuestos } from "./funciones-clases/funciones-repuesto.js";
 
 /* --- CONSTANTES Y VARIABLES ---- */
 
@@ -276,3 +277,4 @@ function mostarOcultarBotonSingUp() {
 /* ----- INVOCACIONES A FUNCIONES ----- */
 
 inicializarBaseDatosUsuario();
+recuperarBDRepuestos();

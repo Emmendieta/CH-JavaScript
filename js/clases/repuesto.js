@@ -1,6 +1,7 @@
 class Repuesto {
-    constructor (codigo, nombre, modelo, vehiculo, precio, cantidad, imagen) {
+    constructor (codigo, codigoRepuesto, nombre, modelo, vehiculo, precio, cantidad, imagen) {
         this.codigo = codigo;
+        this.codigoRepuesto = codigoRepuesto;
         this.nombre = nombre;
         this.modelo = modelo;
         this.vehiculo = vehiculo;
@@ -11,8 +12,12 @@ class Repuesto {
 
     //Getters:
 
-    getCodigo = function(){
+    getCodigo = function() {
         return this.codigo;
+    }
+
+    getCodigoRepuesto = function() {
+        return this.codigoRepuesto;    
     }
 
     getNombre = function() {
@@ -43,6 +48,10 @@ class Repuesto {
 
     setCodigo = function(codigo) {
         this.codigo = codigo;
+    }
+
+    setCodigoRepuesto = function(codigoRepuesto) {
+        this.codigoRepuesto = codigoRepuesto;
     }
 
     setNombre = function(nombre) {
