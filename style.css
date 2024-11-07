@@ -167,6 +167,20 @@ body {
     font-weight: bold;
 }
 
+/* ---- Modal Repuesto ---- */
+
+.modalRepuestoCheck {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#checkBoxRepuestoImagen {
+    margin: 10px;
+}
+
 /* ---- Footer ---- */
 
 #footer {

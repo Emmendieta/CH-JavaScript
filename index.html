@@ -60,12 +60,12 @@
                 <h1 class="mnSectArtTitulo">Repuestos:</h1>
             </article>
             <article class="mnSectArtAdd">
-                <button type="button" class="btn btn-success btnAddRepuesto">Agregar Repuesto</button>
+                <button type="button" class="btn btn-success btnAddRepuesto" id="btnAddRepuesto">Agregar Repuesto</button>
             </article>
             <article class="mnSectArtRepuestos">
                 <div class="card" style="width: 18rem;">
                     <div class="d-flex justify-content-center">
-                        <img src="images/Imagen-no-disponible.png" class="card-img-top" id="imgRepuesto0"
+                        <img src="images/imagen-no-disponible.png" class="card-img-top" id="imgRepuesto0"
                             alt="imgRepuesto">
                     </div>
                     <div class="card-body">
@@ -109,7 +109,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Completa el Formulario para Regsitrarse:</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="modalSingUpX" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="" id="formSingUp">
@@ -146,7 +146,7 @@
                             <input type="text" id="pais" name="pais" required>
                         </div>
                         <div class="form-group">
-                            <label for="nombreUsuario">Nombre Usuario:</label>
+                            <label for="nombreUsuarioModal">Nombre Usuario:</label>
                             <input type="text" id="nombreUsuarioModal" name="nombreUsuario" required>
                         </div>
                         <div class="form-group">
@@ -160,7 +160,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" id="btnModalsingUpCerrar" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-outline-success" id="btnModalSingUp">Registarse</button>
                 </div>
             </div>
@@ -173,7 +173,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Login:</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" id="btnModalLoginX" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="" id="formLogin">
@@ -188,12 +188,65 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" id="btnModalLoginCancel" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" class="btn btn-outline-success" id="btnModalLogin">Login</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Modal Alta Producto -->
+        
+    <div class="modal fade" id="modalRepuesto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalRepuestoTitulo">Completa el Formulario para dar de alta al Repuesto:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="btnModalAltaRepuestoX" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="formAltaRepuesto">
+                        <div class="form-group">
+                            <label for="modalCodigoRepuesto">Codigo del Repuesto:</label>
+                            <input type="number" id="modalCodigoRepuesto" name="codigoRepuesto" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalNombreRepuesto">Nombre:</label>
+                            <input type="text" id="modalNombreRepuesto" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalModeloRepuesto">Modelo:</label>
+                            <input type="number" id="modalModeloRepuesto" name="modelo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalVehiculoRepuesto">Vehículo:</label>
+                            <input type="text" id="modalVehiculoRepuesto" name="vehiculo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalPrecioRepuesto">Precio:</label>
+                            <input type="number" id="modalPrecioRepuesto" name="precio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalCantidadRepuesto">Cantidad:</label>
+                            <input type="number" id="modalCantidadRepuesto" name="cantidad" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalImagenRepuesto">URL de la imágen del Repuesto:</label>
+                            <input type="url" id="modalImagenRepuesto" name="imagenRepuesto" required>
+                        </div>
+                        <div class="form-group modalRepuestoCheck">
+                            <label class="form-check-label" for="checkBoxRepuestoImagen">No tengo imágen del Repuesto por ahora</label>
+                            <input type="checkbox" class="form-check-input" id="checkBoxRepuestoImagen">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btnModalAltaRepuestoCerrar" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-success" id="btnModalConfirmRepuesto">Alta Repuesto</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
 

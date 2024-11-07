@@ -1,8 +1,6 @@
 import { baseDeDatosUsuario } from "../base-datos/bd-usuarios.js";
 import { Usuario } from "../clases/usuario.js";
 
-
-
 // Inicializar la Base de Datos con el usuario con rol de admin:
 
 export function inicializarBaseDatosUsuario() {
@@ -68,10 +66,12 @@ function verificarExistenciaUsuario (usuario) {
         alert ("Error: Verifique el formato de Email ingresado!");
     } else {
         const regexUsuario = /^[a-zA-Z]+$/;
+        //Si no ingresa nombre al repuesto o no cumple con el regex:
         if (usuario.nombreUsuario === "" || !regexUsuario.test(usuario.nombreUsuario)) {
             alert ("Por favor verifique el formato del Nombre de Usuario!");
         } else {
             const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/;
+            //Si no cumple con las condiciones del password:
             if (usuario.password === "" || !regexPassword.test(usuario.password)) {
                 alert ("Por favor verifique el formato del Password");
             } else {
@@ -112,5 +112,37 @@ export function recuperarUsuarioDeBD(usuario, password) {
         } else { return false; }
     }
 }
+
+// Mantener el Login si no pasa mas de 5 minutos:
+
+// Almacenar la sesión del usuario y la hora de login en localStorage:
+export function guardarSesionUsuario(usuario) {
+    const horaLogin = new Date().getTime(); // Hora actual en milisegundos
+    localStorage.setItem('usuarioActivo', usuario);
+    localStorage.setItem('horaLogin', horaLogin);
+}
+
+// Verificar si han pasado más de 5 minutos desde el último acceso:
+export function verificarSesion() {
+    const usuarioActivo = localStorage.getItem('usuarioActivo');
+    const horaLogin = localStorage.getItem('horaLogin');
+    
+    if (usuarioActivo && horaLogin) {
+        const tiempoTranscurrido = new Date().getTime() - parseInt(horaLogin); // Tiempo en milisegundos
+        
+        // Si han pasado más de 5 minutos (300,000 ms), redirigir a login
+        if (tiempoTranscurrido > 300000) {
+            alert("Tu sesión ha expirado, por favor vuelve a iniciar sesión.");
+            localStorage.removeItem('usuarioActivo'); // Eliminar sesión expirado
+            localStorage.removeItem('horaLogin');
+            return false;
+        } else {
+            pUserName.innerText = "Usuario: " + usuarioActivo; // Recuperar el usuario activo
+            return true;
+        }
+    } else if (usuarioActivo === null) { return false; }
+}
+
+
 
 
