@@ -1,11 +1,14 @@
 /* ---- IMPORTACIONES ---- */
 
-import { validarUsuario, validarPassword, cambiarNombreBotonLoginIniciarSesion, cambiarNombreBotonLoginCerrarSesion, 
-        cambiarTextoUsuarioLogueado, cambiarTextoUsuarioInvitado, habilitarBotonCarrito, habilitarIconoCarrito, deshabilitarBotonCarrito, dehabilitarIconoCarrito,
-        habilitarBotonesAgregarEditarEliminarProducto, deshabilitarBotonesAgregarEditarEliminarProducto, habilitarBotonesAgregarProductoACarrito,
-        deshabilitarBotonesAgregarProductoACarrito } from "./funciones-validaciones.js";
+import {
+    validarUsuario, validarPassword, cambiarNombreBotonLoginIniciarSesion, cambiarNombreBotonLoginCerrarSesion,
+    cambiarTextoUsuarioLogueado, cambiarTextoUsuarioInvitado, habilitarBotonCarrito, habilitarIconoCarrito, deshabilitarBotonCarrito, dehabilitarIconoCarrito,
+    habilitarBotonesAgregarEditarEliminarProducto, deshabilitarBotonesAgregarEditarEliminarProducto, habilitarBotonesAgregarProductoACarrito,
+    deshabilitarBotonesAgregarProductoACarrito
+} from "./funciones-validaciones.js";
 import { mostrarModal, ocutalModal, limpiarModalLogin } from "./funciones-modales.js";
-import { recuperarUsuarioDeBD } from "./funciones-usuario.js";
+import { recuperarUsuarioDeBD, devolverCodigoUsuario } from "./funciones-usuario.js";
+import { devuelveListaRepuestosDeCarritoPendiente } from "./funciones-carrito.js";
 
 /* ---- VARIABLES Y CONSTANTES ---- */
 
@@ -33,8 +36,8 @@ export function validarDatosIngresados() {
     //Si no estan validados, muestra la siguiente alerta:
     if ((usuarioValidado === "" || passwordValidado === "") && btnLogin.textContent === loginText) {
         alert("Error: El nombre de usuario y/o password no pueden ser nulos!");
-    //En caso de que este todo Ok se inicia sesión:    
-    } else  if ((usuarioValidado !== "" || passwordValidado !== "") && btnLogin.textContent === loginText) {
+        //En caso de que este todo Ok se inicia sesión:    
+    } else if ((usuarioValidado !== "" || passwordValidado !== "") && btnLogin.textContent === loginText) {
         //Verifico que Exista el Usuario en la Base de Datos:
         if (recuperarUsuarioDeBD(usuarioValidado, passwordValidado) === true) {
             //Cambio el texto para mostrar el usuario Logueado:
@@ -55,9 +58,14 @@ export function validarDatosIngresados() {
             habilitarBotonesAgregarEditarEliminarProducto();
             //Habilito los botones de Agregar Producto al carrito:
             habilitarBotonesAgregarProductoACarrito();
+            //recupero el Codigo del usuario Logueado:
+            const codigoUsuario = devolverCodigoUsuario(usuarioValidado, passwordValidado);
+            //Verifico que no existan carritos pendientes a nombre del Usuario:
+            devuelveListaRepuestosDeCarritoPendiente(codigoUsuario);
 
-        //En caso de que no exista o no coincida algo de los datos, se emite una alerta:
-        } else { alert("Error: Usuario y/o Contraseña incorrectos, por favor verifiquelo!");}
+
+            //En caso de que no exista o no coincida algo de los datos, se emite una alerta:
+        } else { alert("Error: Usuario y/o Contraseña incorrectos, por favor verifiquelo!"); }
     }
 }
 

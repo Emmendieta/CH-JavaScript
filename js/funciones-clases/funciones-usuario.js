@@ -6,7 +6,7 @@ import { Usuario } from "../clases/usuario.js";
 export function inicializarBaseDatosUsuario() {
     const recuperarBaseDeDatos = JSON.parse(localStorage.getItem("baseDeDatosUsuario"));
     if (!recuperarBaseDeDatos || recuperarBaseDeDatos.length === 0) {
-        const adminUsuario = new Usuario (
+        const adminUsuario = new Usuario(
             1,
             "Admin",
             "Admin",
@@ -22,10 +22,7 @@ export function inicializarBaseDatosUsuario() {
         );
         baseDeDatosUsuario.push(adminUsuario);
         localStorage.setItem("baseDeDatosUsuario", JSON.stringify(baseDeDatosUsuario));
-        console.log("Usuario administrador creado al inicializar por primera vez la Base de Datos usuario!");
-    } else {
-        console.log("La Base de Datos usuario ya está inicializada, por lo que no se crea el usuario Administrador!");
-    }
+    } 
 }
 
 // Guardar un nuevo usuario:
@@ -46,34 +43,32 @@ export function altaUsuario(usuario) {
             usuario.nombreUsuario.toLowerCase(),
             usuario.password,
             usuario.esAdmin
-        );    
+        );
         baseDeDatosUsuario.push(nuevoUsuario);
-        console.log("Usuario agregado:", nuevoUsuario);
-        console.log("Base de datos actualizada:", baseDeDatosUsuario);    
         localStorage.setItem("baseDeDatosUsuario", JSON.stringify(baseDeDatosUsuario));
         return true;
-    } else { 
-        alert("Error: El nombre de usuario que intenta crear ya existe o el email ya se encuentra registrado!"); 
+    } else {
+        alert("Error: El nombre de usuario que intenta crear ya existe o el email ya se encuentra registrado!");
         return false;
     }
 }
 
 // Verificar si existe un Usuario:
 
-function verificarExistenciaUsuario (usuario) {
+function verificarExistenciaUsuario(usuario) {
     const recuperarBaseDeDatos = JSON.parse(localStorage.getItem("baseDeDatosUsuario"));
     if (usuario.email === "" || usuario.email === NaN) {
-        alert ("Error: Verifique el formato de Email ingresado!");
+        alert("Error: Verifique el formato de Email ingresado!");
     } else {
         const regexUsuario = /^[a-zA-Z]+$/;
         //Si no ingresa nombre al repuesto o no cumple con el regex:
         if (usuario.nombreUsuario === "" || !regexUsuario.test(usuario.nombreUsuario)) {
-            alert ("Por favor verifique el formato del Nombre de Usuario!");
+            alert("Por favor verifique el formato del Nombre de Usuario!");
         } else {
             const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/;
             //Si no cumple con las condiciones del password:
             if (usuario.password === "" || !regexPassword.test(usuario.password)) {
-                alert ("Por favor verifique el formato del Password");
+                alert("Por favor verifique el formato del Password");
             } else {
                 if (usuario.nombreUsuario === "admin") {
                     alert("Error: No se puede crear un usuario con los provilegios de Administrador!");
@@ -81,18 +76,18 @@ function verificarExistenciaUsuario (usuario) {
                     const verificaNombre = recuperarBaseDeDatos.some((elemento) => elemento.nombreUsuario === usuario.nombreUsuario);
                     const verificaEmail = recuperarBaseDeDatos.some((elemento) => elemento.email === usuario.email);
                     if (verificaNombre === true || verificaEmail === true) { return true; }
-                    else {return false;}
+                    else { return false; }
                 }
             }
         }
-    }    
+    }
 }
 
 // Obtener el codigo Maximo:
 
-function obtenerCodigoMax () {
+function obtenerCodigoMax() {
     const recuperarBaseDeDatos = JSON.parse(localStorage.getItem("baseDeDatosUsuario"));
-    if (recuperarBaseDeDatos.length !== 0) { 
+    if (recuperarBaseDeDatos.length !== 0) {
         const baseDeDatosOrdenadaInversamente = recuperarBaseDeDatos.sort((elementoA, elementoB) => elementoB.codigo - elementoA.codigo);
         return baseDeDatosOrdenadaInversamente[0].codigo;
     }
@@ -113,9 +108,37 @@ export function recuperarUsuarioDeBD(usuario, password) {
     }
 }
 
+/* // Recupero el Codigo Logueado con nombre usuario y password:
+
+export function devolverCodigoUsuario(usuario, password) {
+    const recuperarBaseDeDatos = JSON.parse(localStorage.getItem("baseDeDatosUsuario"));
+    if (recuperarBaseDeDatos.length === 0) { return false; }
+    else {
+        const usuarioEncontrado = recuperarBaseDeDatos.find((elemento) => elemento.nombreUsuario === usuario.toLowerCase());
+        if (usuarioEncontrado !== undefined) {
+            if (usuarioEncontrado.nombreUsuario === usuario.toLowerCase() && usuarioEncontrado.password === password) { return usuarioEncontrado.codigo; }
+            else { return -1; }
+        } else { return -1; }
+    }
+} */
+
+// Recupero el Codigo Logueado con nombre usuario:
+
+export function devolverCodigoUsuario(usuario) {
+    const recuperarBaseDeDatos = JSON.parse(localStorage.getItem("baseDeDatosUsuario"));
+    if (recuperarBaseDeDatos.length === 0) { return false; }
+    else {
+        const usuarioEncontrado = recuperarBaseDeDatos.find((elemento) => elemento.nombreUsuario === usuario.toLowerCase());
+        if (usuarioEncontrado !== undefined) {
+            if (usuarioEncontrado.nombreUsuario === usuario.toLowerCase()) { return usuarioEncontrado.codigo; }
+            else { return -1; }
+        } else { return -1; }
+    }
+}
+
 // Mantener el Login si no pasa mas de 5 minutos:
 
-// Almacenar la sesión del usuario y la hora de login en localStorage:
+/* // Almacenar la sesión del usuario y la hora de login en localStorage:
 export function guardarSesionUsuario(usuario) {
     const horaLogin = new Date().getTime(); // Hora actual en milisegundos
     localStorage.setItem('usuarioActivo', usuario);
@@ -126,10 +149,10 @@ export function guardarSesionUsuario(usuario) {
 export function verificarSesion() {
     const usuarioActivo = localStorage.getItem('usuarioActivo');
     const horaLogin = localStorage.getItem('horaLogin');
-    
+
     if (usuarioActivo && horaLogin) {
         const tiempoTranscurrido = new Date().getTime() - parseInt(horaLogin); // Tiempo en milisegundos
-        
+
         // Si han pasado más de 5 minutos (300,000 ms), redirigir a login
         if (tiempoTranscurrido > 300000) {
             alert("Tu sesión ha expirado, por favor vuelve a iniciar sesión.");
@@ -141,7 +164,7 @@ export function verificarSesion() {
             return true;
         }
     } else if (usuarioActivo === null) { return false; }
-}
+} */
 
 
 

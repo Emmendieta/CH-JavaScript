@@ -50,7 +50,7 @@ export function cambiarNombreBotonLoginIniciarSesion() {
 
 // Funcion cambiar el texto del boton login cuando se cierra sesion:
 
-export function cambiarNombreBotonLoginCerrarSesion () {
+export function cambiarNombreBotonLoginCerrarSesion() {
     if (btnLogin.textContent === cerrarSesionText) { btnLogin.textContent = loginText; }
 }
 
@@ -60,7 +60,14 @@ export function cambiarTextoUsuarioLogueado(nombreUsuario) {
     //Si el texto es "Usuario: Invitado, lo cambia:"
     if (nombreUsuarioLogueado.textContent === invitadoText) {
         nombreUsuarioLogueado.textContent = `Usuario: ${nombreUsuario.toLowerCase()}`;
-    } 
+    }
+}
+
+//Devuelvo el nombre de usuario logueado:
+
+export function devolverNombreUsuario() {
+    const nombreUsuario = (nombreUsuarioLogueado.textContent).replace("Usuario: ", "");
+    return nombreUsuario;
 }
 
 // Funcion para volver al texto original de usuario invitado:

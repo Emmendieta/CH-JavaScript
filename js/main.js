@@ -2,12 +2,14 @@
 
 import { Repuesto } from "./clases/repuesto.js";
 import { Usuario } from "./clases/usuario.js";
-import { altaUsuario, inicializarBaseDatosUsuario, recuperarUsuarioDeBD, guardarSesionUsuario, verificarSesion } from "./funciones-clases/funciones-usuario.js";
-import { recuperarBDRepuestos, mostrarRepuestos, listarRepuestosConFiltro, altaRepuesto, repuestosConFiltro } from "./funciones-clases/funciones-repuesto.js";
-import { deshabilitarBotonesAgregarEditarEliminarProducto, deshabilitarBotonesAgregarProductoACarrito } from "./funciones-clases/funciones-validaciones.js";
+import { inicializarBDCarrito, agregarRepuestoACarrito,actualizarMontototalCarrito, calcularMontoTotalCarrito } from "./funciones-clases/funciones-carrito.js";
+import { altaUsuario, inicializarBaseDatosUsuario, recuperarUsuarioDeBD, devolverCodigoUsuario, /* guardarSesionUsuario, verificarSesion */ } from "./funciones-clases/funciones-usuario.js";
+import { recuperarBDRepuestos, mostrarRepuestos, listarRepuestosConFiltro, altaRepuesto, repuestosConFiltro, listarRepuestos } from "./funciones-clases/funciones-repuesto.js";
+import { deshabilitarBotonesAgregarEditarEliminarProducto, deshabilitarBotonesAgregarProductoACarrito, devolverNombreUsuario } from "./funciones-clases/funciones-validaciones.js";
 import { iniciarLogin, validarDatosIngresados, cerrarSesion } from "./funciones-clases/funciones-botones.js";
-import { limpiarModalLogin, validarSignUp, limpiarDatosModalSingUp, confirmarAltaRepuesto, mostrarModal, limpiarDatosModalAltaRepuesto, 
-    cambiosEnCheckBoxModalRepuesto, restablecerBotonAltaRepuesto, habilitarInputsModalRepuesto } from "./funciones-clases/funciones-modales.js";
+import { limpiarModalLogin, validarSignUp, limpiarDatosModalSingUp, confirmarAltaRepuesto, mostrarModal, limpiarDatosModalAltaRepuesto, cambiosEnCheckBoxModalRepuesto,
+        restablecerBotonAltaRepuesto, habilitarInputsModalRepuesto, validarRepuestoAgregarACarrito, limpiarValoresModalAgregarRepuestoACarrito,
+        ocutalModal } from "./funciones-clases/funciones-modales.js";
 
 /* -------------------------------- CONSTANTES Y VARIABLES -------------------------------- */
 
@@ -51,10 +53,16 @@ const modalRepuestoCheckBox = document.getElementById('checkBoxRepuestoImagen');
 const modalRepuestoBtnCerrar = document.getElementById('btnModalAltaRepuestoCerrar');
 const modalRepuestoBtnX = document.getElementById('btnModalAltaRepuestoX');
 
+/* ---- Modal Agregar Repuesto a Carrito ---- */
+
+const modalAgregarRepuestoACarrito = document.getElementById('modalAgregarRepuestoACarrito');
+const modalAgregarRepuestoACarritoBtnConfirmar = document.getElementById('btnModalRepuestoCarritoConfirmar');
+
 const pUserName = document.getElementById('pUserName');
 const botonesAgregarCarrito = document.querySelectorAll('.btnAgregarProductoCarrito');
 const botonCarrito = document.getElementById('btnCarrito');
 const iconoCarrito = document.getElementById('iconoCarrito');
+
 
 // Se configuro repuestos como let porque con const no me trae los valores de cada repuesto
 
@@ -133,7 +141,7 @@ modalRepuestoBtnConfirm.addEventListener('click', () => {
 
 // Evento hacer click en el boton Cerrar del Modal de Alta Repuesto: 
 
-modalRepuestoBtnCerrar.addEventListener('click', ()=> {
+modalRepuestoBtnCerrar.addEventListener('click', () => {
     limpiarDatosModalAltaRepuesto();
 });
 
@@ -148,7 +156,6 @@ modalRepuestoBtnX.addEventListener('click', () => {
 modalRepuestoCheckBox.addEventListener('change', function () {
     cambiosEnCheckBoxModalRepuesto();
 });
-
 
 // Evento de Filtar Repuestos:
 
@@ -165,15 +172,34 @@ btnBuscarProducto.addEventListener('click', (event) => {
         //Trae la lista original:
         mostrarRepuestos()
         //Cambia el texto del boton buscar para que pueda realizar otra búsqueda:
-        btnBuscarProducto.textContent = btnTextBuscarBuscar;    
+        btnBuscarProducto.textContent = btnTextBuscarBuscar;
     }
 })
+
+
+/* ---------------- MODAL AGREGAR REPUESTO A CARRTIO ---------------- */
+
+modalAgregarRepuestoACarritoBtnConfirmar.addEventListener('click', () => {
+    const repuesto = validarRepuestoAgregarACarrito();
+    const nombreUsuario = devolverNombreUsuario();
+    const codigoUsuario = devolverCodigoUsuario(nombreUsuario)
+        if (repuesto !== undefined) {
+        agregarRepuestoACarrito(repuesto, codigoUsuario);
+        const montoTotal = calcularMontoTotalCarrito(codigoUsuario);
+        actualizarMontototalCarrito(codigoUsuario, montoTotal);
+        limpiarValoresModalAgregarRepuestoACarrito();
+        ocutalModal(modalAgregarRepuestoACarrito);
+    }
+});
+
 
 
 /* -------------------------------- INICIALIZAR CUANDO SE CARGA LA PAGINA -------------------------------- */
 
 inicializarBaseDatosUsuario();
+recuperarBDRepuestos();
 mostrarRepuestos();
+inicializarBDCarrito();
 deshabilitarBotonesAgregarEditarEliminarProducto();
 deshabilitarBotonesAgregarProductoACarrito();
 

@@ -35,14 +35,16 @@
                 </section>
                 <section>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Buscar Por Nombre" aria-label="Search" id="textoBuscadorRepuesto">
+                        <input class="form-control me-2" type="search" placeholder="Buscar Por Nombre"
+                            aria-label="Search" id="textoBuscadorRepuesto">
                         <button class="btn btn-outline-success" type="submit" id="btnBuscarRepuesto">Buscar</button>
                     </form>
                 </section>
                 <section id="hdNavSectionLogin">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <button class="btn btn-outline-success" id="btnLogin" type="button">Iniciar Sesión</button>
-                        <button type="button" class="btn btn-outline-success"  id="btnSingUp" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrarse</button>
+                        <button type="button" class="btn btn-outline-success" id="btnSingUp" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Registrarse</button>
                         <p id="pUserName">Usuario: Invitado</p>
                     </div>
                 </section>
@@ -60,13 +62,13 @@
                 <h1 class="mnSectArtTitulo">Repuestos:</h1>
             </article>
             <article class="mnSectArtAdd">
-                <button type="button" class="btn btn-success btnAddRepuesto" id="btnAddRepuesto">Agregar Repuesto</button>
+                <button type="button" class="btn btn-success btnAddRepuesto" id="btnAddRepuesto">Agregar
+                    Repuesto</button>
             </article>
             <article class="mnSectArtRepuestos">
                 <div class="card" style="width: 18rem;">
                     <div class="d-flex justify-content-center">
-                        <img src="images/imagen-no-disponible.png" class="card-img-top" id="imgRepuesto0"
-                            alt="imgRepuesto">
+                        <img src="images/imagen-no-disponible.png" class="card-img-top" id="imgRepuesto0" alt="imgRepuesto">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title" id="nombreRepuesto0">nombre Repuesto.</h5>
@@ -77,13 +79,16 @@
                         <p class="card-text" id="cantidadRepuesto0">cantidad del Repuesto.</p>
                         <div class="card-body-botones">
                             <div class="card-boyd-btnEdition">
-                                <button class="btn btn-outline-success btnEditProducto" data-indice=""><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="btn btn-outline-danger btnDeleteProducto" data-indice=""><i class="fa-regular fa-circle-xmark"></i></button>
+                                <button class="btn btn-outline-success btnEditProducto" data-indice=""><i
+                                        class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="btn btn-outline-danger btnDeleteProducto" data-indice=""><i
+                                        class="fa-regular fa-circle-xmark"></i></button>
                             </div>
                             <div class="card-body-btnAgregar">
-                                <button class="btn btn-success btnAgregarProductoCarrito" data-indice="">Agregar al carrito</button>
+                                <button class="btn btn-success btnAgregarProductoCarrito" data-indice="">Agregar al
+                                    carrito</button>
                             </div>
-                        </div>                 
+                        </div>
                     </div>
                 </div>
             </article>
@@ -109,7 +114,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Completa el Formulario para Regsitrarse:</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="modalSingUpX" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="modalSingUpX"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="" id="formSingUp">
@@ -160,49 +166,53 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="btnModalsingUpCerrar" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" id="btnModalsingUpCerrar"
+                        data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-outline-success" id="btnModalSingUp">Registarse</button>
                 </div>
             </div>
         </div>
     </div>
 
-        <!-- Modal Login -->
-        <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Login:</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" id="btnModalLoginX" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" id="formLogin">
-                            <div class="form-group">
-                                <label for="nombreUsuarioLogin">Nombre Usuario:</label>
-                                <input type="text" id="nombreUsuarioLogin" name="nombreUsuarioLogin" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="passwordLogin">Password:</label>
-                                <input type="password" id="passwordLogin" name="passwordLogin" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="btnModalLoginCancel" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-outline-success" id="btnModalLogin">Login</button>
-                    </div>
+    <!-- Modal Login -->
+    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Login:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="btnModalLoginX"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="formLogin">
+                        <div class="form-group">
+                            <label for="nombreUsuarioLogin">Nombre Usuario:</label>
+                            <input type="text" id="nombreUsuarioLogin" name="nombreUsuarioLogin" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordLogin">Password:</label>
+                            <input type="password" id="passwordLogin" name="passwordLogin" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btnModalLoginCancel"
+                        data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-success" id="btnModalLogin">Login</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Modal Alta Producto -->
-        
+    <!-- Modal Alta Producto -->
     <div class="modal fade" id="modalRepuesto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalRepuestoTitulo">Completa el Formulario para dar de alta al Repuesto:</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="btnModalAltaRepuestoX" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="modalRepuestoTitulo">Completa el Formulario para dar de alta al
+                        Repuesto:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="btnModalAltaRepuestoX"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="" id="formAltaRepuesto">
@@ -235,14 +245,64 @@
                             <input type="url" id="modalImagenRepuesto" name="imagenRepuesto" required>
                         </div>
                         <div class="form-group modalRepuestoCheck">
-                            <label class="form-check-label" for="checkBoxRepuestoImagen">No tengo imágen del Repuesto por ahora</label>
+                            <label class="form-check-label" for="checkBoxRepuestoImagen">No tengo imágen del Repuesto
+                                por ahora</label>
                             <input type="checkbox" class="form-check-input" id="checkBoxRepuestoImagen">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="btnModalAltaRepuestoCerrar" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-outline-success" id="btnModalConfirmRepuesto">Alta Repuesto</button>
+                    <button type="button" class="btn btn-secondary" id="btnModalAltaRepuestoCerrar"
+                        data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-success" id="btnModalConfirmRepuesto">Alta
+                        Repuesto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agregar Producto a Carrito -->
+    <div class="modal fade" id="modalAgregarRepuestoACarrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalAgregarRepuestoCarritoTitulo">Cantidad requerida:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="btnModalAgregarRepuestoCarritoX"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="formAgregarRepuestoCarrito">
+                        <div class="form-group modalAgregarCarrito">
+                            <img src="images/imagen-no-disponible.png" class="card-img-top" id="modalRepuestoCarritoImagen" alt="imgRepuesto">
+                        </div>                        
+                        <div class="form-group modalAgregarCarrito">
+                            <label for="" id="modalRepuestoCarritoLabelCodigoRepuesto">Codigo del Repuesto:</label>
+                        </div>
+                        <div class="form-group modalAgregarCarrito">
+                            <label for="" id="modalRepuestoCarritoLabelNombreRepuesto">Nombre del Repuesto:</label>
+                        </div>
+                        <div class="form-group modalAgregarCarrito">
+                            <label for="" id="modalRepuestoCarritoLabelModeloRepuesto">Modelo:</label>
+                        </div>
+                        <div class="form-group modalAgregarCarrito">
+                            <label for="" id="modalRepuestoCarritoLabelVehiculoRepuesto">Vehículo:</label>
+                        </div>
+                        <div class="form-group modalAgregarCarrito">
+                            <label for="" id="modalRepuestoCarritoLabelPrecioRepuesto">Precio:</label>
+                        </div>
+                        <div class="form-group modalAgregarCarrito">
+                            <label for="" id="modalRepuestoCarritoLabelCantidadRepuesto">Cantidad disponible:</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalCantidadRequeridaAgregarRepuestoCarrito">Ingrese la cantidad requerida:</label>
+                            <input type="number" id="modalRepuestoCarritoCantidad" name="modalCantidadRequeridaAgregarRepuestoCarrito" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btnModalRepuestoCarritoCerrar"
+                        data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-success" id="btnModalRepuestoCarritoConfirmar">Confirmar</button>
                 </div>
             </div>
         </div>

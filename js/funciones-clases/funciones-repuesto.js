@@ -4,7 +4,7 @@ import { baseDeDatosRepuestos } from "../base-datos/bd-repuestos.js";
 import { Repuesto } from "../clases/repuesto.js";
 import { deshabilitarBotonesAgregarEditarEliminarProducto } from "./funciones-validaciones.js";
 import { mostrarModal, modificarTextoBotonEditarRepuesto, restablecerBotonAltaRepuesto, modificarTextoBotonEliminarRepuesto, deshabilitarInputsModalRepuesto,
-        desHabilitarCodigoRepuestoInput  } from "./funciones-modales.js";
+        desHabilitarCodigoRepuestoInput, limpiarValoresModalAgregarRepuestoACarrito } from "./funciones-modales.js";
 
 const contenedorRepuestos = document.querySelector('.mnSectArtRepuestos');
 const btnBuscarProducto = document.getElementById('btnBuscarRepuesto');
@@ -24,6 +24,17 @@ const modalRepuestoImagen = document.getElementById('modalImagenRepuesto');
 const modalRepuestoBtnConfirm = document.getElementById('btnModalConfirmRepuesto');
 const modalRepuestoCheckBox = document.getElementById('checkBoxRepuestoImagen');
 
+/* ---- Modal Agregar Repuesto a Carrito ---- */
+
+const modalAgregarRepuestoACarrito = document.getElementById('modalAgregarRepuestoACarrito');
+const modalAgregarRepuestoACarritoImagen = document.getElementById('modalRepuestoCarritoImagen');
+const modalAgregarRepuestoACarritoLabelCodigoRepuesto = document.getElementById('modalRepuestoCarritoLabelCodigoRepuesto');
+const modalAgregarRepuestoACarritoNombreRepuesto = document.getElementById('modalRepuestoCarritoLabelNombreRepuesto');
+const modalAgregarRepuestoACarritoModeloRepuesto = document.getElementById('modalRepuestoCarritoLabelModeloRepuesto');
+const modalAgregarRepuestoACarritoVehiculoRepuesto = document.getElementById('modalRepuestoCarritoLabelVehiculoRepuesto');
+const modalAgregarRepuestoACarritoPrecioRepuesto = document.getElementById('modalRepuestoCarritoLabelPrecioRepuesto');
+const modalAgregarRepuestoACarritoCantidadRepuesto = document.getElementById('modalRepuestoCarritoLabelCantidadRepuesto');
+const modalAgregarRepuestoACarritoBtnConfirmar = document.getElementById('btnModalRepuestoCarritoConfirmar');
 
 // Funcion recuperardo la Base de Datos de los repuestos:
 
@@ -32,9 +43,6 @@ export function recuperarBDRepuestos() {
     if (recuperarBaseDeDatosRepuesto === null || recuperarBaseDeDatosRepuesto.length === 0) {
         recuperarBaseDeDatosRepuesto = crearBDRepuestos();
         localStorage.setItem("baseDeDatosRepuesto", JSON.stringify(recuperarBaseDeDatosRepuesto));
-        console.log("Base de Datos de Repuestos creada por primera vez correctamente!");
-    } else {
-        console.log("Base de Datos de Repuestos recuperada correctamente!");    
     }
 }
 
@@ -42,7 +50,7 @@ export function recuperarBDRepuestos() {
 
 function crearBDRepuestos() {
     let nuevaBDRepuestos = [];
-    const repuesto1 = new Repuesto(1, 10000000,"Retrovisores", 2011, "Astra", 123.55, 15, "https://http2.mlstatic.com/D_NQ_NP_707465-MLA75573563840_042024-O.webp");
+    const repuesto1 = new Repuesto(1, 10000000, "Retrovisores", 2011, "Astra", 123.55, 15, "https://http2.mlstatic.com/D_NQ_NP_707465-MLA75573563840_042024-O.webp");
     const repuesto2 = new Repuesto(2, 10000001, "Parabrisas", 2011, "Astra", 1000.00, 15, "https://http2.mlstatic.com/D_NQ_NP_814707-MLA75396323622_042024-O.webp");
     const repuesto3 = new Repuesto(3, 10000002, "Volante", 2011, "Astra", 750.99, 10, "https://http2.mlstatic.com/D_797387-MLA51898968943_102022-C.jpg");
     const repuesto4 = new Repuesto(4, 10000003, "Bujías x 4", 2011, "Astra", 250.55, 100, "https://http2.mlstatic.com/D_NQ_NP_960535-MLA31040323720_062019-O.webp");
@@ -71,11 +79,9 @@ export function altaRepuesto(repuesto) {
             repuesto.imagen
         );
         recuperarBaseDeDatosRepuesto.push(nuevoRepuesto);
-        console.log(`Repuesto Agregado:`, nuevoRepuesto);
-        console.log("Base de datos actualizada: ", recuperarBaseDeDatosRepuesto);
         localStorage.setItem("baseDeDatosRepuesto", JSON.stringify(recuperarBaseDeDatosRepuesto));
         return true;
-    } else { 
+    } else {
         alert("Error: El Repuesto que quiere crear ya existe!");
         return false;
     }
@@ -89,11 +95,12 @@ function verificarExistenciaRepuesto(repuesto) {
         crearBDRepuestos();
     }
     //Si no se cumple con las condiciones del codigo de repuesto:
-    if (repuesto.codigoRepuesto === NaN || repuesto.codigoRepuesto < 0) { alert ("Error: No se puedo leer correctamente el código del Repuesto!"); 
-    //En caso de que lo cumpla:    
+    if (repuesto.codigoRepuesto === NaN || repuesto.codigoRepuesto < 0) {
+        alert("Error: No se puedo leer correctamente el código del Repuesto!");
+        //En caso de que lo cumpla:    
     } else {
         //Si no cumple con las condiciones del nombre del repuesto:
-        if (repuesto.nombre === "" || repuesto.nombre === NaN) { alert ("Error: No se pudo leer correctamente el Nombre del Repuesto!"); }
+        if (repuesto.nombre === "" || repuesto.nombre === NaN) { alert("Error: No se pudo leer correctamente el Nombre del Repuesto!"); }
         else {
             const verificarCodigoRepuesto = recuperarBaseDeDatosRepuesto.some((elemento) => String(elemento.codigoRepuesto) === String(repuesto.codigoRepuesto));
             const verificarNombre = recuperarBaseDeDatosRepuesto.some((elemento) => elemento.nombre === repuesto.nombre);
@@ -111,7 +118,7 @@ function verificarExistenciaRepuesto(repuesto) {
 function obtenerCodigoMax() {
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
     if (recuperarBaseDeDatosRepuesto.length === 0) {
-        crearBDRepuestos(); 
+        crearBDRepuestos();
     }
     const recuperarBDInvertida = recuperarBaseDeDatosRepuesto.sort((elementoA, elementoB) => elementoB.codigo - elementoA.codigo);
     return recuperarBDInvertida[0].codigo;
@@ -119,20 +126,20 @@ function obtenerCodigoMax() {
 
 // Devuelve lista de Repuestos:
 
-function listarRepuestos() {
+export function listarRepuestos() {
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
     //Verifico si la base de datos es null o no es un array
     if (!Array.isArray(recuperarBaseDeDatosRepuesto)) {
         //Si no existe o no es un array, crear la base de datos
-        return crearBDRepuestos(); 
+        return crearBDRepuestos();
     } else {
-        return recuperarBaseDeDatosRepuesto; 
+        return recuperarBaseDeDatosRepuesto;
     }
 }
 
 //Devuelve un Repuesto por codigoRepuesto:
 
-function listarRepuestoPorCodigoRepuesto(pCodigoRepuesto) {
+export function listarRepuestoPorCodigoRepuesto(pCodigoRepuesto) {
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem('baseDeDatosRepuesto'));
     // Verifico que se recupere correctamente la BD:
     if (recuperarBaseDeDatosRepuesto.length === 0) {
@@ -142,7 +149,7 @@ function listarRepuestoPorCodigoRepuesto(pCodigoRepuesto) {
         // En caso de que se recupera la BD:
         else {
             //Busco al Repuesto segun el codigo:
-            const repuestoEncontrado = recuperarBDRepuestos.find((repuesto) => repuesto.codigoRepuesto === pCodigoRepuesto);
+            const repuestoEncontrado = recuperarBaseDeDatosRepuesto.find((repuesto) => repuesto.codigoRepuesto === v);
             //Verifico que lo encuentre:
             if (repuestoEncontrado !== 'undefined') {
                 const devolucionRepuesto = new Repuesto(repuestoEncontrado.codigo, repuestoEncontrado.codigoRepuesto, repuestoEncontrado.nombre, repuestoEncontrado.modelo, repuestoEncontrado.vehiculo, repuestoEncontrado.precio, repuestoEncontrado.cantidad, repuestoEncontrado.imagen);
@@ -150,10 +157,10 @@ function listarRepuestoPorCodigoRepuesto(pCodigoRepuesto) {
                 return devolucionRepuesto;
             } else { alert("Error: No se pudo recuperar la información del repuesto!"); }
         }
-    //En caso de que se recupere la BD:
+        //En caso de que se recupere la BD:
     } else {
         //Busco al Repuesto segun el codigo:
-        const repuestoEncontrado = recuperarBDRepuestos.find((repuesto) => repuesto.codigoRepuesto === pCodigoRepuesto);
+        const repuestoEncontrado = recuperarBaseDeDatosRepuesto.find((repuesto) => repuesto.codigoRepuesto === parseInt(pCodigoRepuesto));
         //Verifico que lo encuentre:
         if (repuestoEncontrado !== 'undefined') {
             const devolucionRepuesto = new Repuesto(repuestoEncontrado.codigo, repuestoEncontrado.codigoRepuesto, repuestoEncontrado.nombre, repuestoEncontrado.modelo, repuestoEncontrado.vehiculo, repuestoEncontrado.precio, repuestoEncontrado.cantidad, repuestoEncontrado.imagen);
@@ -169,7 +176,7 @@ export function editarRepuesto(repuesto) {
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem('baseDeDatosRepuesto'));
     //Verifico que se recupere correctamente la BD:
     if (recuperarBaseDeDatosRepuesto.length === 0) {
-        recuperarBaseDeDatosRepuesto = crearBDRepuestos();  
+        recuperarBaseDeDatosRepuesto = crearBDRepuestos();
     }
     //Verifico que se haya cargado correctamente la BD:
     if (recuperarBaseDeDatosRepuesto.length === 0) { alert("Error: No se pudo recuperar la Base de Datos de Repuestos!"); }
@@ -180,18 +187,17 @@ export function editarRepuesto(repuesto) {
         if (repuestoEncontrado !== 'undefined') {
             const indexRepuesto = recuperarBaseDeDatosRepuesto.findIndex((repuestoBD) => String(repuestoBD.codigoRepuesto) === String(repuesto.codigoRepuesto));
             if (indexRepuesto !== -1) {
-                const devolucionRepuesto = new Repuesto(repuestoEncontrado.codigo, repuestoEncontrado.codigoRepuesto, repuestoEncontrado.nombre, repuestoEncontrado.modelo, 
+                const devolucionRepuesto = new Repuesto(repuestoEncontrado.codigo, repuestoEncontrado.codigoRepuesto, repuestoEncontrado.nombre, repuestoEncontrado.modelo,
                     repuestoEncontrado.vehiculo, repuestoEncontrado.precio, repuestoEncontrado.cantidad, repuestoEncontrado.imagen);
                 //Verifico que no sean los mismo valores que intento guardar:
                 if ((devolucionRepuesto.nombre === repuesto.nombre) && (devolucionRepuesto.modelo === repuesto.modelo) && (devolucionRepuesto.vehiculo === repuesto.vehiculo) &&
-                (devolucionRepuesto.precio === repuesto.precio) && (devolucionRepuesto.cantidad === repuesto.cantidad) && (devolucionRepuesto.imagen === repuesto.imagen))
-                { alert("Error: No se modifica el Repuesto, ya que los valores ingresados son exactamente iguales a los que estan almacenados!");}
+                    (devolucionRepuesto.precio === repuesto.precio) && (devolucionRepuesto.cantidad === repuesto.cantidad) && (devolucionRepuesto.imagen === repuesto.imagen)) { alert("Error: No se modifica el Repuesto, ya que los valores ingresados son exactamente iguales a los que estan almacenados!"); }
                 else {
                     recuperarBaseDeDatosRepuesto[indexRepuesto] = { ...recuperarBaseDeDatosRepuesto[indexRepuesto], ...repuesto };
                     // Guardar la base de datos actualizada en localStorage
                     localStorage.setItem('baseDeDatosRepuesto', JSON.stringify(recuperarBaseDeDatosRepuesto));
                 }
-            } else {alert("Error: No se pudo recuperar el Index del Repuesto deseado!");}
+            } else { alert("Error: No se pudo recuperar el Index del Repuesto deseado!"); }
         } else { alert("Error: No se pudo recuperar correctamente el Repuesto seleccionado!"); }
     }
 }
@@ -213,8 +219,8 @@ export function eliminarRepuesto(repuesto) {
             if (indexRepuesto !== -1) {
                 recuperarBaseDeDatosRepuesto.splice(indexRepuesto, 1);
                 localStorage.setItem('baseDeDatosRepuesto', JSON.stringify(recuperarBaseDeDatosRepuesto));
-            } else {alert("Error: No se pudo recuperar el indez del Repuesto deseado!");}
-        } else {alert ("Error: No se pudo recuperar la información del Repuesto solicitado!");}
+            } else { alert("Error: No se pudo recuperar el indez del Repuesto deseado!"); }
+        } else { alert("Error: No se pudo recuperar la información del Repuesto solicitado!"); }
     }
 }
 
@@ -269,7 +275,7 @@ export function mostrarRepuestos() {
             desHabilitarCodigoRepuestoInput();
             mostrarModal(modalRepuesto);
         });
-        //En caso de que haga cliick en el boton de eliminar un determinado Repuesto:
+        //En caso de que haga click en el boton de eliminar un determinado Repuesto:
         const btnEliminarRepuesto = contenedorRepuestos.querySelector(`.btnDeleteProducto[data-indice="${indice}"]`);
         //Evento si hago click en el boton eliminar:
         btnEliminarRepuesto.addEventListener('click', () => {
@@ -284,9 +290,28 @@ export function mostrarRepuestos() {
             deshabilitarInputsModalRepuesto();
             mostrarModal(modalRepuesto);
         });
+        //En caso de que haga click en el boton de agregar al carrito un determinado Repuesto:
+        const btnAgregarProductoCarrito = contenedorRepuestos.querySelector(`.btnAgregarProductoCarrito[data-indice="${indice}"]`);
+        //Evento si hago click en el boton agregar a carrito:
+        btnAgregarProductoCarrito.addEventListener('click', () => {
+            //Cargo los valores del Repuesto Seleccionado en el Modal Agregar a Carrito:
+            modalAgregarRepuestoACarritoImagen.src = repuesto.imagen;
+            modalAgregarRepuestoACarritoLabelCodigoRepuesto.textContent = `Codigo Repuesto: ${repuesto.codigoRepuesto}`;
+            modalAgregarRepuestoACarritoNombreRepuesto.textContent = `Nombre: ${repuesto.nombre}`;
+            modalAgregarRepuestoACarritoModeloRepuesto.textContent = `Modelo: ${repuesto.modelo}`;
+            modalAgregarRepuestoACarritoVehiculoRepuesto.textContent = `Vehiculo: ${repuesto.vehiculo}`;
+            modalAgregarRepuestoACarritoPrecioRepuesto.textContent = `Precio: ${repuesto.precio}`;
+            modalAgregarRepuestoACarritoCantidadRepuesto.textContent = `Cantidad: ${repuesto.cantidad}`;
+            limpiarValoresModalAgregarRepuestoACarrito();
+            mostrarModal(modalAgregarRepuestoACarrito);
+        });
+
+
+
         deshabilitarBotonesAgregarEditarEliminarProducto();
     });
 }
+
 
 // Devuelve una Lista de Repuesto pero filtandola con el Buscador:
 
@@ -316,7 +341,6 @@ export function repuestosConFiltro() {
         }
     }
 }
-
 
 function mostrarRepuestosConFiltro(listaFiltrada) {
     //Limpio la Lista de Repuestos;

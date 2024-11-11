@@ -1,7 +1,7 @@
 import { Usuario } from "../clases/usuario.js";
 import { Repuesto } from "../clases/repuesto.js";
 import { altaUsuario } from "./funciones-usuario.js";
-import { altaRepuesto, mostrarRepuestos, editarRepuesto , eliminarRepuesto} from "./funciones-repuesto.js";
+import { altaRepuesto, mostrarRepuestos, editarRepuesto, eliminarRepuesto, listarRepuestoPorCodigoRepuesto } from "./funciones-repuesto.js";
 import { habilitarBotonesAgregarProductoACarrito } from "./funciones-validaciones.js";
 
 /* ---------------- VARIABLES Y CONSTANTES ---------------- */
@@ -43,13 +43,27 @@ const textModificarRepuesto = "Modificar Repuesto";
 const textRestablecerRepuesto = "Alta Repuesto";
 const textEliminarRepuesto = "Eliminar Repuesto";
 
+/* ---- Modal Agregar Repuesto a Carrito ---- */
+
+const modalAgregarRepuestoACarrito = document.getElementById('modalAgregarRepuestoACarrito');
+const modalAgregarRepuestoACarritoImagen = document.getElementById('modalRepuestoCarritoImagen');
+const modalAgregarRepuestoACarritoLabelCodigoRepuesto = document.getElementById('modalRepuestoCarritoLabelCodigoRepuesto');
+const modalAgregarRepuestoACarritoNombreRepuesto = document.getElementById('modalRepuestoCarritoLabelNombreRepuesto');
+const modalAgregarRepuestoACarritoModeloRepuesto = document.getElementById('modalRepuestoCarritoLabelModeloRepuesto');
+const modalAgregarRepuestoACarritoVehiculoRepuesto = document.getElementById('modalRepuestoCarritoLabelVehiculoRepuesto');
+const modalAgregarRepuestoACarritoPrecioRepuesto = document.getElementById('modalRepuestoCarritoLabelPrecioRepuesto');
+const modalAgregarRepuestoACarritoCantidadRepuesto = document.getElementById('modalRepuestoCarritoLabelCantidadRepuesto');
+const modalAgregarRepuestoACarritoBtnX = document.getElementById('btnModalAgregarRepuestoCarritoX');
+const modalAgregarRepuestoACarritoBtnCerrar = document.getElementById('btnModalRepuestoCarritoCerrar');
+const modalAgregarRepuestoACarritoBtnConfirmar = document.getElementById('btnModalRepuestoCarritoConfirmar');
+const modalAgregarRepuestoACarritoInputCantidad = document.getElementById('modalRepuestoCarritoCantidad');
 
 /* ---------------- FUNCIONES ---------------- */
 
 // Funcion Mostrar Modal:
 
 export function mostrarModal(nombreModal) {
-    const modal = new bootstrap.Modal(nombreModal); 
+    const modal = new bootstrap.Modal(nombreModal);
     modal.show();
 }
 
@@ -153,24 +167,22 @@ function validarAltaProducto() {
                 if (modalRepuestoVehiculo.value.length > 0 && regexNombre.test(modalRepuestoVehiculo.value)) {
                     const regexPrecio = /^\d+(\.\d{2})?$/;
                     if (modalRepuestoPrecio.value.length > 0 && parseFloat(modalRepuestoPrecio.value) > 0 && regexPrecio.test(modalRepuestoPrecio.value)) {
-                            if (modalRepuestoCantidad.value.length > 0 && parseInt(modalRepuestoCantidad.value) > 0 && regexModelo.test(modalRepuestoCantidad.value)) {
+                        if (modalRepuestoCantidad.value.length > 0 && parseInt(modalRepuestoCantidad.value) > 0 && regexModelo.test(modalRepuestoCantidad.value)) {
                             if (modalRepuestoImagen.value === "") {
                                 //En caso de que no establezca una url de la imagen:
                                 const recursoImagen = "https://github.com/Emmendieta/CH-JavaScript/blob/main/images/Imagen-no-disponible.png?raw=true";
-                                const nuevoRepuestoSinImagen = new Repuesto (0, modalRepuestoCodigoRepuesto.value, modalRepuestoNombre.value, modalRepuestoModelo.value, modalRepuestoVehiculo.value, modalRepuestoPrecio.value, modalRepuestoCantidad.value, recursoImagen);
-                                console.log(nuevoRepuestoSinImagen);
+                                const nuevoRepuestoSinImagen = new Repuesto(0, modalRepuestoCodigoRepuesto.value, modalRepuestoNombre.value, modalRepuestoModelo.value, modalRepuestoVehiculo.value, modalRepuestoPrecio.value, modalRepuestoCantidad.value, recursoImagen);
                                 return nuevoRepuestoSinImagen;
                             } else {
                                 //En caso de que establezca una url de la imgen:
-                                const nuevoRepuesto = new Repuesto (0, modalRepuestoCodigoRepuesto.value, modalRepuestoNombre.value, modalRepuestoModelo.value, modalRepuestoVehiculo.value, modalRepuestoPrecio.value, modalRepuestoCantidad.value, modalRepuestoImagen.value);
-                                console.log(nuevoRepuesto);
+                                const nuevoRepuesto = new Repuesto(0, modalRepuestoCodigoRepuesto.value, modalRepuestoNombre.value, modalRepuestoModelo.value, modalRepuestoVehiculo.value, modalRepuestoPrecio.value, modalRepuestoCantidad.value, modalRepuestoImagen.value);
                                 return nuevoRepuesto;
                             };
                         } else { alert("Error: La cantidad del Repuesto no puede ser nula y solo acepta valores enteros positivos!"); }
                     } else { alert("Error: El precio no puede ser nulo y solo toma valores positivos y con 2 decimales. Ej. 1000.58"); }
                 } else { alert("Error: El nombre del vehículo no puede ser nulo y solo toma palabras!"); }
             } else { alert("Error: El Modelo del Repuesto no puede ser nulo y solo toma valores numéricos mayores a 1800!"); }
-        } else { alert("Error: El Nombre del Repuesto no puede ser nulo, y solo acepta palabras sin caraceteres especiales!"); }      
+        } else { alert("Error: El Nombre del Repuesto no puede ser nulo, y solo acepta palabras sin caraceteres especiales!"); }
     } else { alert("Error: El Código del Repuesto no puede ser nulo, y solo toma valores numericos de 8 dígitos sin espacios, letras, ni caracteres especiales!"); }
 }
 
@@ -277,11 +289,40 @@ export function deshabilitarInputsModalRepuesto() {
     modalRepuestoCheckBox.disabled = true;
 }
 
+
 //Funcion para deshabilitar el input del codigo de Repuesto del modal Repuesto:
 
 export function desHabilitarCodigoRepuestoInput() {
     modalRepuestoCodigoRepuesto.disabled = true;
 }
+
+/* ---------------- MODAL AGREGAR REPUESTO A CARRITO ---------------- */
+
+// Funcion para Validar la cantidad de Repuesto a Agregar:
+
+export function validarRepuestoAgregarACarrito() {
+    let soloCodigo = (modalAgregarRepuestoACarritoLabelCodigoRepuesto.textContent).replace("Codigo Repuesto: ", "");
+
+    let repuesto =  listarRepuestoPorCodigoRepuesto(parseInt(soloCodigo));
+    if (modalAgregarRepuestoACarritoInputCantidad.length === 0) { alert("Error: No puede ingresar un valor nulo!"); }
+    else if (modalAgregarRepuestoACarritoInputCantidad.value <= 0 || modalAgregarRepuestoACarritoInputCantidad.value > repuesto.cantidad) { alert("Error: El valor no puede ser negativo o superior al stock disponible!");}
+    else {
+        const repuestoValidado = new Repuesto(repuesto.codigo, repuesto.codigoRepuesto, repuesto.nombre, repuesto.modelo, repuesto.vehiculo, repuesto.precio, parseInt(modalAgregarRepuestoACarritoInputCantidad.value), repuesto.imagen);
+        return repuestoValidado;
+    }
+}
+
+// Funcion para Limiar valores en el Modal de Agregar Repuesto a Carrito:
+
+export function limpiarValoresModalAgregarRepuestoACarrito () {
+    modalAgregarRepuestoACarritoInputCantidad.value = "";
+}
+
+
+
+
+
+
 
 
 
