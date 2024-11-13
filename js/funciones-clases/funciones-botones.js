@@ -12,20 +12,6 @@ import { devuelveListaRepuestosDeCarritoPendiente, finalizarCarritoEnBD,  } from
 
 import { modalLoginNombreUsuario, modalLoginPassword, btnLogin, singUpButton, nombreUsuarioLogueado, cerrarSesionText,loginText, modalLogin } from "../variables-constantes.js"
 
-/* ---- VARIABLES Y CONSTANTES ---- */
-
-/* const btnLogin = document.getElementById('btnLogin');
-const singUpButton = document.getElementById('btnSingUp');
-const nombreUsuarioLogueado = document.getElementById('pUserName');
-const cerrarSesionText = "Cerrar Sesión";
-const loginText = "Iniciar Sesión"; */
-
-/* ---- Modal Login: ---- */
-
-/* const modalLogin = document.getElementById('modalLogin');
-const modalLoginNombreUsuario = document.getElementById('nombreUsuarioLogin');
-const modalLoginPassword = document.getElementById('passwordLogin'); */
-
 /* ---------------- LOGIN ---------------- */
 
 // Usuario y Password validado e Inicio de Sesión:

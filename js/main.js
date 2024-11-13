@@ -15,42 +15,6 @@ import { modalRepuesto, modalRepuestoBtnConfirm, modalRepuestoCheckBox, btnLogin
     modalBtnLogin, modalSingUpButton, modalSingUpX, modalSingUpCerrar, modalRepuestoBtnCerrar, modalRepuestoBtnX, modalAgregarRepuestoACarrito, 
     modalAgregarRepuestoACarritoBtnConfirmar, pUserName, invitadoText, btnTextBuscarBuscar, btnTxtBuscarLimpiar } from "./variables-constantes.js"
 
-/* const btnLogin = document.getElementById('btnLogin');
-const btnFinalizarCarrito = document.getElementById('btnCarrito');
-const btnBuscarProducto = document.getElementById('btnBuscarRepuesto');
-const btnAltaRepuesto = document.getElementById('btnAddRepuesto'); */
-
-/* ---- Modal Login ---- */
-
-/* const modalLoginBtnX = document.getElementById('btnModalLoginX');
-const modalLoginbtnCancel = document.getElementById('btnModalLoginCancel');
-const modalBtnLogin = document.getElementById('btnModalLogin'); */
-
-/* ---- Modal Sing Up ---- */
-
-/* const modalSingUpButton = document.getElementById('btnModalSingUp');
-const modalSingUpX = document.getElementById('modalSingUpX');
-const modalSingUpCerrar = document.getElementById('btnModalsingUpCerrar'); */
-
-/* ---- Modal Repuesto ---- */
-
-/* const modalRepuesto = document.getElementById('modalRepuesto');
-const modalRepuestoBtnConfirm = document.getElementById('btnModalConfirmRepuesto');
-const modalRepuestoCheckBox = document.getElementById('checkBoxRepuestoImagen');
-const modalRepuestoBtnCerrar = document.getElementById('btnModalAltaRepuestoCerrar');
-const modalRepuestoBtnX = document.getElementById('btnModalAltaRepuestoX'); */
-
-/* ---- Modal Agregar Repuesto a Carrito ---- */
-
-/* const modalAgregarRepuestoACarrito = document.getElementById('modalAgregarRepuestoACarrito');
-const modalAgregarRepuestoACarritoBtnConfirmar = document.getElementById('btnModalRepuestoCarritoConfirmar');
-
-const pUserName = document.getElementById('pUserName');
-const invitadoText = "Usuario: Invitado";
-const btnTextBuscarBuscar = "Buscar";
-const btnTxtBuscarLimpiar = "Limpiar"; */
-
-
 /* -------------------------------- LOGIN -------------------------------- */
 
 // Evento de hacer Click para iniciar Sesion y mostrar el Modal de Login:
