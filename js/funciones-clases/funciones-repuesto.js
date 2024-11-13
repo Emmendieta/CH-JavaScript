@@ -4,7 +4,8 @@ import { baseDeDatosRepuestos } from "../base-datos/bd-repuestos.js";
 import { Repuesto } from "../clases/repuesto.js";
 import { deshabilitarBotonesAgregarEditarEliminarProducto } from "./funciones-validaciones.js";
 import { mostrarModal, modificarTextoBotonEditarRepuesto, modificarTextoBotonEliminarRepuesto, deshabilitarInputsModalRepuesto, desHabilitarCodigoRepuestoInput, 
-    limpiarValoresModalAgregarRepuestoACarrito,habilitarInputsModalRepuesto } from "./funciones-modales.js";
+    limpiarValoresModalAgregarRepuestoACarrito,habilitarInputsModalRepuesto, 
+    mostarModalError} from "./funciones-modales.js";
 
 /* ---------------- VARIABLES Y CONSTANTES ---------------- */
 
@@ -58,6 +59,8 @@ export function altaRepuesto(repuesto) {
         );
         recuperarBaseDeDatosRepuesto.push(nuevoRepuesto);
         localStorage.setItem("baseDeDatosRepuesto", JSON.stringify(recuperarBaseDeDatosRepuesto));
+        const texto = `Feliciades! Se ha creado con exito el Repuesto: "${repuesto.nombre}"!`;
+        mostarModalError(texto);
         return true;
     } else {
         alert("Error: El Repuesto que quiere crear ya existe!");
@@ -174,6 +177,8 @@ export function editarRepuesto(repuesto) {
                     recuperarBaseDeDatosRepuesto[indexRepuesto] = { ...recuperarBaseDeDatosRepuesto[indexRepuesto], ...repuesto };
                     // Guardar la base de datos actualizada en localStorage
                     localStorage.setItem('baseDeDatosRepuesto', JSON.stringify(recuperarBaseDeDatosRepuesto));
+                    const texto = `Feliciades! Se ha actualizado con exito el Repuesto: ${repuesto.nombre}!`;
+                    mostarModalError(texto);
                 }
             } else { alert("Error: No se pudo recuperar el Index del Repuesto deseado!"); }
         } else { alert("Error: No se pudo recuperar correctamente el Repuesto seleccionado!"); }
@@ -199,6 +204,8 @@ export function eliminarRepuesto(repuesto) {
             if (indexRepuesto !== -1) {
                 recuperarBaseDeDatosRepuesto.splice(indexRepuesto, 1);
                 localStorage.setItem('baseDeDatosRepuesto', JSON.stringify(recuperarBaseDeDatosRepuesto));
+                const texto = `Feliciades! Se ha eliminado con exito el Repuesto: "${repuesto.nombre}"!`;
+                mostarModalError(texto);
             } else { alert("Error: No se pudo recuperar el indez del Repuesto deseado!"); }
         } else { alert("Error: No se pudo recuperar la información del Repuesto solicitado!"); }
     }

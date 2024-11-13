@@ -1,5 +1,6 @@
 import { baseDeDatosCarrito } from "../base-datos/bd-carrito.js";
 import { Carrito} from "../clases/carrito.js";
+import { mostarModalError } from "./funciones-modales.js";
 import { actualizarStockRepuestos } from "./funciones-repuesto.js";
 
 // Inicializar la BD Carrito:
@@ -106,6 +107,8 @@ export function agregarRepuestoACarrito(repuesto, codigoUsuario) {
             else { listaRepuestos.push(repuesto); }
             //Actualizo la BD:
             localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD));
+            const texto = `Se ha agregado correctamente el Repuesto: ${repuesto.nombre}, con la cantidad: ${repuesto.cantidad} a su Carrito!`;
+            mostarModalError(texto);
         } else { 
             //En caso de que no exista ningun carrito pendiente, creo uno nuevo:
             const carritoNuevo = new Carrito(0, codigoUsuario, [], 0, false);
@@ -161,13 +164,19 @@ export function finalizarCarritoEnBD(codigoUsuario) {
         const carritoEncontrado = recuperarBD.find(carrito => carrito.codigoUsuario === codigoUsuario && !carrito.finalizado);
         //Verifico que encuentre el carrito:
         if (carritoEncontrado) {
+            //Verifico que el carrito tenga al menos un repuesto:
+            if (carritoEncontrado.listaRepuestos.length > 0) {
             //Finalizo el carrito
             carritoEncontrado.finalizado = true;
             //Actualizo BD:
             localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD)); 
             const listaRepuestos = carritoEncontrado.listaRepuestos;
             //Actualizo el stock de los repuestos:
-            actualizarStockRepuestos(listaRepuestos)
+            actualizarStockRepuestos(listaRepuestos);
+            const texto = "Felicidades, se ha finalizado su compra con exito!";
+            mostarModalError(texto);
+            } else { alert("Error: Tiene que agregar al menos un Repuesto al Carrito para finalizarlo!");}
+
         } else { alert("Error: No se pudo recuperar el Carrito del Cliente solicitado!"); }
     } else { alert("Error: No se pudo recuperar correctamente la Base de Datos de los Carritos!"); }
 } 

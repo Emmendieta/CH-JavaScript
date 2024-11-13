@@ -75,8 +75,9 @@ export function validarSignUp() {
                                                     );
                                                     if (altaUsuario(nuevoUsuario) === true) {
                                                         limpiarDatosModalSingUp();
-                                                        alert(`Felicidades! se ha dado de alta al usuario ${nuevoUsuario.nombreUsuario}!`);
                                                         ocutalModal(modalSignUp);
+                                                        const texto = `Felicidades! se ha dado de alta al usuario: "${nuevoUsuario.nombreUsuario}"!`
+                                                        mostarModalError(texto);
                                                     } else { }
                                                 } else { alert("Error: Por favor, verifique su contraseña y la confirmación de su contraseña ya que no son iguales!"); }
                                             } else { alert(" Error: La confirmación de su contraseña no puede ser nula y/o tiene que tener al menos un número, una mayúscula y una minúscula!") }
@@ -325,6 +326,54 @@ export function mostrarModalFinalizarCarrito(codigoUsuario) {
         ocutalModal(modalContainer);
     });
 }
+
+//Funcion para mostrar errores/alerta/etc a traves de un Modal:
+
+export function mostarModalError(texto) {
+    const contenedorMain = document.getElementById('main');
+    //Si existe el modal lo elimino:
+    const modalExistente = document.getElementById('modalError');
+    if (modalExistente) { modalExistente.remove(); }
+    //Creo un contenedor para el modal con la estructura de Bootstrap:
+    const modalContainer = document.createElement('div');
+    modalContainer.innerHTML = '';
+    modalContainer.classList.add('modal', 'fade');
+    modalContainer.id = 'modalError';
+    modalContainer.tabIndex = '-1';
+    modalContainer.setAttribute('aria-labelledby', 'exampleModalToggleLabel');
+    modalContainer.setAttribute('aria-hidden', 'true');
+    // Contenido del modal:    
+    modalContainer.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Información Importante:</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalErrorBtnX"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalErrorTexto"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    `
+    contenedorMain.appendChild(modalContainer);
+    mostrarModal(modalContainer);
+    //Evento cuando se hace click en la X para cerrar el modal:
+    const btnModalErrorX = document.getElementById('modalErrorBtnX');
+    btnModalErrorX.addEventListener('click', ocutalModal(modalContainer));
+    const textoModal = document.getElementById('modalErrorTexto');
+    textoModal.textContent = "";
+    textoModal.textContent = texto;
+
+}
+
+/*
+
+*/
+
 
 
 

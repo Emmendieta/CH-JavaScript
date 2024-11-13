@@ -7,7 +7,7 @@ import { deshabilitarBotonesAgregarEditarEliminarProducto, deshabilitarBotonesAg
 import { iniciarLogin, validarDatosIngresados, cerrarSesion } from "./funciones-clases/funciones-botones.js";
 import { limpiarModalLogin, validarSignUp, limpiarDatosModalSingUp, confirmarAltaRepuesto, mostrarModal, limpiarDatosModalAltaRepuesto, cambiosEnCheckBoxModalRepuesto,
         restablecerBotonAltaRepuesto, habilitarInputsModalRepuesto, validarRepuestoAgregarACarrito, limpiarValoresModalAgregarRepuestoACarrito,
-        ocutalModal, mostrarModalFinalizarCarrito } from "./funciones-clases/funciones-modales.js";       
+        ocutalModal, mostrarModalFinalizarCarrito, mostarModalError } from "./funciones-clases/funciones-modales.js";       
 
 /* -------------------------------- CONSTANTES Y VARIABLES -------------------------------- */
 
@@ -62,7 +62,7 @@ btnLogin.addEventListener('click', () => {
     } else if (pUserName.textContent !== invitadoText) {
         //En caso de que ya se haya logueado, se iniciar el logout:
         cerrarSesion();
-    }
+    } 
 });
 
 // Evento de hacer Click para iniciar sesion con usuario y password y cerrar el Modal del Login:
