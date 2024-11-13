@@ -3,60 +3,15 @@ import { Repuesto } from "../clases/repuesto.js";
 import { altaUsuario } from "./funciones-usuario.js";
 import { altaRepuesto, mostrarRepuestos, editarRepuesto, eliminarRepuesto, listarRepuestoPorCodigoRepuesto } from "./funciones-repuesto.js";
 import { habilitarBotonesAgregarProductoACarrito } from "./funciones-validaciones.js";
+import { devuelveCarritoPendienteUsuario } from "./funciones-carrito.js";
+import { finalizarCarrito } from "./funciones-botones.js";
 
 /* ---------------- VARIABLES Y CONSTANTES ---------------- */
 
-/* ---- Modal Login ---- */
-
-const modalLogin = document.getElementById('modalLogin');
-const modalLoginNombreUsuario = document.getElementById('nombreUsuarioLogin');
-const modalLoginPassword = document.getElementById('passwordLogin');
-
-/* ---- Modal Sign Up ---- */
-
-const modalSignUp = document.getElementById('exampleModal');
-const modalInputNombre = document.getElementById('nombre');
-const modalInputApellido = document.getElementById('apellido');
-const modalInputEmail = document.getElementById('email');
-const modalInputTelefono = document.getElementById('telefono');
-const modalInputDireccion = document.getElementById('direccion');
-const modalInputCiudad = document.getElementById('ciudad');
-const modalInputProvincia = document.getElementById('provincia');
-const modalInputPais = document.getElementById('pais');
-const modalInputNombreUsuario = document.getElementById('nombreUsuarioModal');
-const modalInputPassword = document.getElementById('password');
-const modalInputConfirmarPassword = document.getElementById('confirmarPassword');
-
-/* ---- Modal Repuesto ---- */
-
-const modalRepuesto = document.getElementById('modalRepuesto');
-const modalRepuestoCodigoRepuesto = document.getElementById('modalCodigoRepuesto');
-const modalRepuestoNombre = document.getElementById('modalNombreRepuesto');
-const modalRepuestoModelo = document.getElementById('modalModeloRepuesto');
-const modalRepuestoVehiculo = document.getElementById('modalVehiculoRepuesto');
-const modalRepuestoPrecio = document.getElementById('modalPrecioRepuesto');
-const modalRepuestoCantidad = document.getElementById('modalCantidadRepuesto');
-const modalRepuestoImagen = document.getElementById('modalImagenRepuesto');
-const modalRepuestoBtnConfirm = document.getElementById('btnModalConfirmRepuesto');
-const modalRepuestoCheckBox = document.getElementById('checkBoxRepuestoImagen');
-const textModificarRepuesto = "Modificar Repuesto";
-const textRestablecerRepuesto = "Alta Repuesto";
-const textEliminarRepuesto = "Eliminar Repuesto";
-
-/* ---- Modal Agregar Repuesto a Carrito ---- */
-
-const modalAgregarRepuestoACarrito = document.getElementById('modalAgregarRepuestoACarrito');
-const modalAgregarRepuestoACarritoImagen = document.getElementById('modalRepuestoCarritoImagen');
-const modalAgregarRepuestoACarritoLabelCodigoRepuesto = document.getElementById('modalRepuestoCarritoLabelCodigoRepuesto');
-const modalAgregarRepuestoACarritoNombreRepuesto = document.getElementById('modalRepuestoCarritoLabelNombreRepuesto');
-const modalAgregarRepuestoACarritoModeloRepuesto = document.getElementById('modalRepuestoCarritoLabelModeloRepuesto');
-const modalAgregarRepuestoACarritoVehiculoRepuesto = document.getElementById('modalRepuestoCarritoLabelVehiculoRepuesto');
-const modalAgregarRepuestoACarritoPrecioRepuesto = document.getElementById('modalRepuestoCarritoLabelPrecioRepuesto');
-const modalAgregarRepuestoACarritoCantidadRepuesto = document.getElementById('modalRepuestoCarritoLabelCantidadRepuesto');
-const modalAgregarRepuestoACarritoBtnX = document.getElementById('btnModalAgregarRepuestoCarritoX');
-const modalAgregarRepuestoACarritoBtnCerrar = document.getElementById('btnModalRepuestoCarritoCerrar');
-const modalAgregarRepuestoACarritoBtnConfirmar = document.getElementById('btnModalRepuestoCarritoConfirmar');
-const modalAgregarRepuestoACarritoInputCantidad = document.getElementById('modalRepuestoCarritoCantidad');
+import { modalLoginNombreUsuario, modalLoginPassword, modalSignUp, modalInputNombre, modalInputApellido, modalInputEmail, modalInputTelefono, modalInputDireccion, 
+    modalInputCiudad, modalInputProvincia, modalInputPais, modalInputNombreUsuario, modalInputPassword, modalInputConfirmarPassword, modalRepuesto, modalRepuestoCodigoRepuesto, 
+    modalRepuestoNombre, modalRepuestoModelo, modalRepuestoVehiculo, modalRepuestoPrecio, modalRepuestoCantidad, modalRepuestoImagen, modalRepuestoBtnConfirm, modalRepuestoCheckBox, 
+    textModificarRepuesto, textRestablecerRepuesto, textEliminarRepuesto, modalAgregarRepuestoACarritoLabelCodigoRepuesto, modalAgregarRepuestoACarritoInputCantidad } from "../variables-constantes.js"
 
 /* ---------------- FUNCIONES ---------------- */
 
@@ -171,11 +126,11 @@ function validarAltaProducto() {
                             if (modalRepuestoImagen.value === "") {
                                 //En caso de que no establezca una url de la imagen:
                                 const recursoImagen = "https://github.com/Emmendieta/CH-JavaScript/blob/main/images/Imagen-no-disponible.png?raw=true";
-                                const nuevoRepuestoSinImagen = new Repuesto(0, modalRepuestoCodigoRepuesto.value, modalRepuestoNombre.value, modalRepuestoModelo.value, modalRepuestoVehiculo.value, modalRepuestoPrecio.value, modalRepuestoCantidad.value, recursoImagen);
+                                const nuevoRepuestoSinImagen = new Repuesto(0, parseInt(modalRepuestoCodigoRepuesto.value), modalRepuestoNombre.value, parseInt(modalRepuestoModelo.value), modalRepuestoVehiculo.value, parseFloat(modalRepuestoPrecio.value), parseInt(modalRepuestoCantidad.value), recursoImagen);
                                 return nuevoRepuestoSinImagen;
                             } else {
                                 //En caso de que establezca una url de la imgen:
-                                const nuevoRepuesto = new Repuesto(0, modalRepuestoCodigoRepuesto.value, modalRepuestoNombre.value, modalRepuestoModelo.value, modalRepuestoVehiculo.value, modalRepuestoPrecio.value, modalRepuestoCantidad.value, modalRepuestoImagen.value);
+                                const nuevoRepuesto = new Repuesto(0, parseInt(modalRepuestoCodigoRepuesto.value), modalRepuestoNombre.value, parseInt(modalRepuestoModelo.value), modalRepuestoVehiculo.value, parseFloat(modalRepuestoPrecio.value), parseInt(modalRepuestoCantidad.value), modalRepuestoImagen.value);
                                 return nuevoRepuesto;
                             };
                         } else { alert("Error: La cantidad del Repuesto no puede ser nula y solo acepta valores enteros positivos!"); }
@@ -205,7 +160,6 @@ export function confirmarAltaRepuesto() {
         mostrarRepuestos();
         habilitarBotonesAgregarProductoACarrito();
         limpiarDatosModalAltaRepuesto();
-
     } else if (modalRepuestoBtnConfirm.innerText == textEliminarRepuesto) {
         const repuesto = validarAltaProducto();
         eliminarRepuesto(repuesto);
@@ -215,7 +169,6 @@ export function confirmarAltaRepuesto() {
         limpiarDatosModalAltaRepuesto();
     } else { alert("Error: No se pudo realizar correctamente el evento del boton Agregar/Editar Repuesto!"); }
 }
-
 
 // Funcion Limpiar El Modal de Repuesto:
 
@@ -253,7 +206,6 @@ export function modificarTextoBotonEliminarRepuesto() {
     modalRepuestoBtnConfirm.innerText = textEliminarRepuesto;
 }
 
-
 // Restablezco el texto original del Boton Alta repuesto:
 
 export function restablecerBotonAltaRepuesto() {
@@ -274,7 +226,6 @@ export function habilitarInputsModalRepuesto() {
     modalRepuestoCheckBox.disabled = false;
 }
 
-
 // Funcion para dehabilitar los datos de los inputs del modal Repuesto:
 
 export function deshabilitarInputsModalRepuesto() {
@@ -288,7 +239,6 @@ export function deshabilitarInputsModalRepuesto() {
     modalRepuestoImagen.disabled = true;
     modalRepuestoCheckBox.disabled = true;
 }
-
 
 //Funcion para deshabilitar el input del codigo de Repuesto del modal Repuesto:
 
@@ -318,6 +268,63 @@ export function limpiarValoresModalAgregarRepuestoACarrito () {
     modalAgregarRepuestoACarritoInputCantidad.value = "";
 }
 
+/* ---------------- MODAL FINALIZAR CARRITO ---------------- */
+
+export function mostrarModalFinalizarCarrito(codigoUsuario) {
+    const contenedorMain = document.getElementById('main');
+    const carrito = devuelveCarritoPendienteUsuario(codigoUsuario);
+    //Si existe el modal lo elimino:
+    const modalExistente = document.getElementById('modalCarrito');
+    if (modalExistente) { modalExistente.remove(); }
+    // Creo un contenedor para el modal con la estructura de Bootstrap:
+    const modalContainer = document.createElement('div');
+    modalContainer.innerHTML = '';
+    modalContainer.classList.add('modal', 'fade', 'modalRepuestoCarrito');
+    modalContainer.id = 'modalCarrito';
+    modalContainer.tabIndex = '-1';
+    modalContainer.setAttribute('aria-labelledby', 'modalCarritoLabel');
+    modalContainer.setAttribute('aria-hidden', 'true');
+    // Contenido del modal:
+    modalContainer.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCarritoLabel">Repuestos en Carrito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ${carrito.listaRepuestos.map((repuesto, indice) => `
+                        <div class="modalRepuestoCarritoBody">
+                            <img src="${repuesto.imagen || 'images/imagen-no-disponible.png'}" class= "modalImgRepuestoCarrito" alt="Imagen de ${repuesto.nombre}">
+                            <div class="card-body modalRepuestoCarrito">
+                                <h5 class="card-title">Nombre: ${repuesto.nombre}</h5>
+                                <p class="card-text">Cantidad: ${repuesto.cantidad}</p>
+                                <button class="btn btn-outline-danger btnRemoveRepuestoCarrito" data-indice="${indice}">
+                                    <i class="fa-solid fa-trash"></i> Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btnFinalizarCarritoConfirm" id="btnModalCarritoConfirmarFinalizar">Finalizar Carrito</button>
+                </div>
+            </div>
+        </div>
+    `;
+    // Agregar el modal al contenedor principal
+    contenedorMain.appendChild(modalContainer);
+    // Mostrar el modal usando Bootstrap
+    const modalElement = document.getElementById('modalCarrito');
+    mostrarModal(modalElement);
+    const btnFinalizarCarrito =  modalContainer.querySelector(`#btnModalCarritoConfirmarFinalizar`);
+    btnFinalizarCarrito.addEventListener('click', () => { 
+        finalizarCarrito();
+        mostrarRepuestos();
+        habilitarBotonesAgregarProductoACarrito();
+        ocutalModal(modalContainer);
+    });
+}
 
 
 

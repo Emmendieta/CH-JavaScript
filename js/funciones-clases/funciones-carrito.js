@@ -1,5 +1,6 @@
 import { baseDeDatosCarrito } from "../base-datos/bd-carrito.js";
 import { Carrito} from "../clases/carrito.js";
+import { actualizarStockRepuestos } from "./funciones-repuesto.js";
 
 // Inicializar la BD Carrito:
 
@@ -54,7 +55,7 @@ function obtenerCodigoMax() {
 
 // Devuelve Carrito pendiente de un Usuario:
 
-function devuelveCarritoPendienteUsuario(codigoUsuario) {
+export function devuelveCarritoPendienteUsuario(codigoUsuario) {
     const recuperarBD = baseDeDatosCarrito;
     if (recuperarBD.length >= 0) {
         //Busco un carrito a nombre del usuario:
@@ -84,7 +85,6 @@ export function devuelveListaRepuestosDeCarritoPendiente(codigoUsuario) {
     } else { alert("Error: No tiene carritos pendiente el usuario ingresado!");}
 }
 
-
 // Funcion para agregar un Repuesto al Carrito de un Cliente
 
 export function agregarRepuestoACarrito(repuesto, codigoUsuario) {
@@ -106,7 +106,12 @@ export function agregarRepuestoACarrito(repuesto, codigoUsuario) {
             else { listaRepuestos.push(repuesto); }
             //Actualizo la BD:
             localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD));
-        } else { alert("Error: No se pudo recuperar el Carrito del Cliente solicitado!"); }
+        } else { 
+            //En caso de que no exista ningun carrito pendiente, creo uno nuevo:
+            const carritoNuevo = new Carrito(0, codigoUsuario, [], 0, false);
+            altaCarrito(carritoNuevo);
+            agregarRepuestoACarrito(repuesto, codigoUsuario);
+        }
     } else { alert("Error: No se pudo recuperar correctamente la Base de Datos de los Carritos!"); }
 }
 
@@ -147,3 +152,22 @@ export function actualizarMontototalCarrito(codigoUsuario,montoTotal) {
         } else { alert("Error: No se pudo recuperar el Carrito del Cliente solicitado!"); }
     } else { alert("Error: No se pudo recuperar correctamente la Base de Datos de los Carritos!"); }
 }
+
+//Funcion finalizar carrito:
+
+export function finalizarCarritoEnBD(codigoUsuario) {
+    const recuperarBD = baseDeDatosCarrito;
+    if (recuperarBD.length >= 0){
+        const carritoEncontrado = recuperarBD.find(carrito => carrito.codigoUsuario === codigoUsuario && !carrito.finalizado);
+        //Verifico que encuentre el carrito:
+        if (carritoEncontrado) {
+            //Finalizo el carrito
+            carritoEncontrado.finalizado = true;
+            //Actualizo BD:
+            localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD)); 
+            const listaRepuestos = carritoEncontrado.listaRepuestos;
+            //Actualizo el stock de los repuestos:
+            actualizarStockRepuestos(listaRepuestos)
+        } else { alert("Error: No se pudo recuperar el Carrito del Cliente solicitado!"); }
+    } else { alert("Error: No se pudo recuperar correctamente la Base de Datos de los Carritos!"); }
+} 

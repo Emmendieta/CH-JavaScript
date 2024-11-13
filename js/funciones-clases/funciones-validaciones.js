@@ -1,17 +1,6 @@
 /* ---------------- VARIABLES Y CONSTANTES ---------------- */
 
-const btnLogin = document.getElementById('btnLogin');
-const nombreUsuarioLogueado = document.getElementById('pUserName');
-const btnCarrito = document.getElementById('btnCarrito');
-const iconoCarrito = document.getElementById('iconoCarrito');
-const btnAltaRepuesto = document.getElementById('btnAddRepuesto');
-
-const mnSectArtAdd = document.querySelector('.mnSectArtAdd');
-const cerrarSesionText = "Cerrar Sesión";
-const loginText = "Iniciar Sesión";
-const invitadoText = "Usuario: Invitado";
-const adminText = "Usuario: admin";
-
+import { btnLogin, btnAltaRepuesto, invitadoText, nombreUsuarioLogueado, cerrarSesionText,loginText, btnCarrito, iconoCarrito, mnSectArtAdd, adminText } from "../variables-constantes.js"
 
 /* ---------------- FUNCIONES ---------------- */
 
@@ -46,7 +35,6 @@ export function validarPassword(password) {
 export function cambiarNombreBotonLoginIniciarSesion() {
     if (btnLogin.textContent === loginText) { btnLogin.textContent = cerrarSesionText; }
 }
-
 
 // Funcion cambiar el texto del boton login cuando se cierra sesion:
 
@@ -150,6 +138,8 @@ export function habilitarBotonesAgregarEditarEliminarProducto() {
     }
 }
 
+//Funcion para deshabilitar los botones de edicion/eliminacion de Repuestos:
+
 export function deshabilitarBotonesAgregarEditarEliminarProducto() {
     const btnEditarProducto = document.querySelectorAll('.btnEditProducto');
     const btnDeleteProducto = document.querySelectorAll('.btnDeleteProducto');
@@ -166,69 +156,3 @@ export function deshabilitarBotonesAgregarEditarEliminarProducto() {
         btnAltaRepuesto.style.display = 'none';
     }
 }
-
-
-
-/*function deshabilitarBotonesEdicionEliminarProductos() {
-    const btnEditarProducto = document.querySelectorAll('.btnEditProducto');
-    const btnDeleteProducto = document.querySelectorAll('.btnDeleteProducto');
-    const mnSectArtAdd = document.querySelector('.mnSectArtAdd');
-    if (pUserName.innerText === "Usuario: admin") {
-        btnEditarProducto.forEach(boton => {
-            boton.disabled = false;
-            boton.style.display = 'block';
-        });
-        btnDeleteProducto.forEach(boton => {    
-            boton.disabled = false;
-            boton.style.display = 'block';
-        });
-        mnSectArtAdd.style.display = 'flex';
-    } else {
-        btnEditarProducto.forEach(boton => {
-            boton.disabled = true;
-            boton.style.display = 'none';
-        });
-        btnDeleteProducto.forEach(boton => {
-            boton.disabled = true;
-            boton.style.display = 'none';
-        });
-        mnSectArtAdd.style.display = 'none';
-    }
-}*/
-
-
-
-/*
-// Funcion Habilitar botones de "Agregar" y del "Carrito":
-
-function habilitarDeshabilitarBotonesEnLogin() {    
-    const habillitarBotonesAgregarCarrito = document.querySelectorAll('.btnAgregarProductoCarrito');
-
-    if (pUserName.textContent === invitadoText) {
-
-        habillitarBotonesAgregarCarrito.forEach((boton) => {
-            boton.disabled = true;
-            boton.style.opacity = 0.5;
-            boton.style.pointerEvents = "none";
-        });
-        botonCarrito.disabled = true;
-        botonCarrito.style.opacity = 0.5;
-        botonCarrito.style.pointerEvents = "none";
-        iconoCarrito.disabled = true;
-        iconoCarrito.style.opacity = 0.5;
-    }
-    else {
-        habillitarBotonesAgregarCarrito.forEach((boton) => {
-            boton.disabled = false;
-            boton.style.opacity = 1;
-            boton.style.pointerEvents = "auto";
-        });
-        botonCarrito.disabled = false;
-        botonCarrito.style.opacity = 1;
-        botonCarrito.style.pointerEvents = "auto";
-        iconoCarrito.disabled = false;
-        iconoCarrito.style.opacity = 1;
-    }
-} */
-
-

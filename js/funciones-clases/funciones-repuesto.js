@@ -1,40 +1,18 @@
-// Funcion recuperardo la Base de Datos de los repuestos:
+/* ---------------- IMPORTACIONES ---------------- */
 
 import { baseDeDatosRepuestos } from "../base-datos/bd-repuestos.js";
 import { Repuesto } from "../clases/repuesto.js";
 import { deshabilitarBotonesAgregarEditarEliminarProducto } from "./funciones-validaciones.js";
-import { mostrarModal, modificarTextoBotonEditarRepuesto, restablecerBotonAltaRepuesto, modificarTextoBotonEliminarRepuesto, deshabilitarInputsModalRepuesto,
-        desHabilitarCodigoRepuestoInput, limpiarValoresModalAgregarRepuestoACarrito } from "./funciones-modales.js";
+import { mostrarModal, modificarTextoBotonEditarRepuesto, modificarTextoBotonEliminarRepuesto, deshabilitarInputsModalRepuesto, desHabilitarCodigoRepuestoInput, 
+    limpiarValoresModalAgregarRepuestoACarrito,habilitarInputsModalRepuesto } from "./funciones-modales.js";
 
-const contenedorRepuestos = document.querySelector('.mnSectArtRepuestos');
-const btnBuscarProducto = document.getElementById('btnBuscarRepuesto');
-const btnTextBuscarBuscar = "Buscar";
-const btnTxtBuscarLimpiar = "Limpiar";
+/* ---------------- VARIABLES Y CONSTANTES ---------------- */
 
-/* ---- Modal Repuesto ---- */
-
-const modalRepuesto = document.getElementById('modalRepuesto');
-const modalRepuestoCodigoRepuesto = document.getElementById('modalCodigoRepuesto');
-const modalRepuestoNombre = document.getElementById('modalNombreRepuesto');
-const modalRepuestoModelo = document.getElementById('modalModeloRepuesto');
-const modalRepuestoVehiculo = document.getElementById('modalVehiculoRepuesto');
-const modalRepuestoPrecio = document.getElementById('modalPrecioRepuesto');
-const modalRepuestoCantidad = document.getElementById('modalCantidadRepuesto');
-const modalRepuestoImagen = document.getElementById('modalImagenRepuesto');
-const modalRepuestoBtnConfirm = document.getElementById('btnModalConfirmRepuesto');
-const modalRepuestoCheckBox = document.getElementById('checkBoxRepuestoImagen');
-
-/* ---- Modal Agregar Repuesto a Carrito ---- */
-
-const modalAgregarRepuestoACarrito = document.getElementById('modalAgregarRepuestoACarrito');
-const modalAgregarRepuestoACarritoImagen = document.getElementById('modalRepuestoCarritoImagen');
-const modalAgregarRepuestoACarritoLabelCodigoRepuesto = document.getElementById('modalRepuestoCarritoLabelCodigoRepuesto');
-const modalAgregarRepuestoACarritoNombreRepuesto = document.getElementById('modalRepuestoCarritoLabelNombreRepuesto');
-const modalAgregarRepuestoACarritoModeloRepuesto = document.getElementById('modalRepuestoCarritoLabelModeloRepuesto');
-const modalAgregarRepuestoACarritoVehiculoRepuesto = document.getElementById('modalRepuestoCarritoLabelVehiculoRepuesto');
-const modalAgregarRepuestoACarritoPrecioRepuesto = document.getElementById('modalRepuestoCarritoLabelPrecioRepuesto');
-const modalAgregarRepuestoACarritoCantidadRepuesto = document.getElementById('modalRepuestoCarritoLabelCantidadRepuesto');
-const modalAgregarRepuestoACarritoBtnConfirmar = document.getElementById('btnModalRepuestoCarritoConfirmar');
+import {  
+    modalRepuesto, modalRepuestoCodigoRepuesto, modalRepuestoNombre, modalRepuestoModelo, modalRepuestoVehiculo, modalRepuestoPrecio, modalRepuestoCantidad, modalRepuestoImagen,
+    modalAgregarRepuestoACarritoLabelCodigoRepuesto, btnBuscarProducto, modalAgregarRepuestoACarrito, btnTextBuscarBuscar, btnTxtBuscarLimpiar,  contenedorRepuestos,
+    modalAgregarRepuestoACarritoImagen, modalAgregarRepuestoACarritoNombreRepuesto, modalAgregarRepuestoACarritoModeloRepuesto, modalAgregarRepuestoACarritoVehiculoRepuesto,
+    modalAgregarRepuestoACarritoPrecioRepuesto, modalAgregarRepuestoACarritoCantidadRepuesto } from "../variables-constantes.js"
 
 // Funcion recuperardo la Base de Datos de los repuestos:
 
@@ -70,12 +48,12 @@ export function altaRepuesto(repuesto) {
         let recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem("baseDeDatosRepuesto"));
         const nuevoRepuesto = new Repuesto(
             maxCodigo,
-            repuesto.codigoRepuesto,
+            parseInt(repuesto.codigoRepuesto),
             repuesto.nombre,
-            repuesto.modelo,
+            parseInt(repuesto.modelo),
             repuesto.vehiculo,
-            repuesto.precio,
-            repuesto.cantidad,
+            parseFloat(repuesto.precio),
+            parseInt(repuesto.cantidad),
             repuesto.imagen
         );
         recuperarBaseDeDatosRepuesto.push(nuevoRepuesto);
@@ -112,7 +90,6 @@ function verificarExistenciaRepuesto(repuesto) {
     }
 }
 
-
 // Obtener el codigo Maximo:
 
 function obtenerCodigoMax() {
@@ -121,7 +98,7 @@ function obtenerCodigoMax() {
         crearBDRepuestos();
     }
     const recuperarBDInvertida = recuperarBaseDeDatosRepuesto.sort((elementoA, elementoB) => elementoB.codigo - elementoA.codigo);
-    return recuperarBDInvertida[0].codigo;
+    return parseInt(recuperarBDInvertida[0].codigo);
 }
 
 // Devuelve lista de Repuestos:
@@ -149,7 +126,7 @@ export function listarRepuestoPorCodigoRepuesto(pCodigoRepuesto) {
         // En caso de que se recupera la BD:
         else {
             //Busco al Repuesto segun el codigo:
-            const repuestoEncontrado = recuperarBaseDeDatosRepuesto.find((repuesto) => repuesto.codigoRepuesto === v);
+            const repuestoEncontrado = recuperarBaseDeDatosRepuesto.find((repuesto) => repuesto.codigoRepuesto === pCodigoRepuesto); 
             //Verifico que lo encuentre:
             if (repuestoEncontrado !== 'undefined') {
                 const devolucionRepuesto = new Repuesto(repuestoEncontrado.codigo, repuestoEncontrado.codigoRepuesto, repuestoEncontrado.nombre, repuestoEncontrado.modelo, repuestoEncontrado.vehiculo, repuestoEncontrado.precio, repuestoEncontrado.cantidad, repuestoEncontrado.imagen);
@@ -183,16 +160,17 @@ export function editarRepuesto(repuesto) {
     //En caso de que recupero correctamente:
     else {
         //Busco al Repuesto segun el codigo:
-        const repuestoEncontrado = recuperarBaseDeDatosRepuesto.find((repuestoBD) => String(repuestoBD.codigoRepuesto) === String(repuesto.codigoRepuesto));
+        const repuestoEncontrado = recuperarBaseDeDatosRepuesto.find((repuestoBD) => parseInt(repuestoBD.codigoRepuesto) === parseInt(repuesto.codigoRepuesto));
         if (repuestoEncontrado !== 'undefined') {
-            const indexRepuesto = recuperarBaseDeDatosRepuesto.findIndex((repuestoBD) => String(repuestoBD.codigoRepuesto) === String(repuesto.codigoRepuesto));
+            const indexRepuesto = recuperarBaseDeDatosRepuesto.findIndex((repuestoBD) => parseInt(repuestoBD.codigoRepuesto) === parseInt(repuesto.codigoRepuesto));
             if (indexRepuesto !== -1) {
-                const devolucionRepuesto = new Repuesto(repuestoEncontrado.codigo, repuestoEncontrado.codigoRepuesto, repuestoEncontrado.nombre, repuestoEncontrado.modelo,
-                    repuestoEncontrado.vehiculo, repuestoEncontrado.precio, repuestoEncontrado.cantidad, repuestoEncontrado.imagen);
+                const devolucionRepuesto = new Repuesto(parseInt(repuestoEncontrado.codigo), parseInt(repuestoEncontrado.codigoRepuesto), repuestoEncontrado.nombre, parseInt(repuestoEncontrado.modelo),
+                    repuestoEncontrado.vehiculo, parseFloat(repuestoEncontrado.precio), parseInt(repuestoEncontrado.cantidad), repuestoEncontrado.imagen);
                 //Verifico que no sean los mismo valores que intento guardar:
-                if ((devolucionRepuesto.nombre === repuesto.nombre) && (devolucionRepuesto.modelo === repuesto.modelo) && (devolucionRepuesto.vehiculo === repuesto.vehiculo) &&
-                    (devolucionRepuesto.precio === repuesto.precio) && (devolucionRepuesto.cantidad === repuesto.cantidad) && (devolucionRepuesto.imagen === repuesto.imagen)) { alert("Error: No se modifica el Repuesto, ya que los valores ingresados son exactamente iguales a los que estan almacenados!"); }
+                if ((devolucionRepuesto.nombre === repuesto.nombre) && (devolucionRepuesto.modelo === parseInt(repuesto.modelo)) && (devolucionRepuesto.vehiculo === repuesto.vehiculo) &&
+                    (devolucionRepuesto.precio === parseFloat(repuesto.precio)) && (devolucionRepuesto.cantidad === parseInt(repuesto.cantidad)) && (devolucionRepuesto.imagen === repuesto.imagen)) { alert("Error: No se modifica el Repuesto, ya que los valores ingresados son exactamente iguales a los que estan almacenados!"); }
                 else {
+                    repuesto.codigo = repuestoEncontrado.codigo;
                     recuperarBaseDeDatosRepuesto[indexRepuesto] = { ...recuperarBaseDeDatosRepuesto[indexRepuesto], ...repuesto };
                     // Guardar la base de datos actualizada en localStorage
                     localStorage.setItem('baseDeDatosRepuesto', JSON.stringify(recuperarBaseDeDatosRepuesto));
@@ -201,6 +179,8 @@ export function editarRepuesto(repuesto) {
         } else { alert("Error: No se pudo recuperar correctamente el Repuesto seleccionado!"); }
     }
 }
+
+// Funcion para Eliminar un repuesto:
 
 export function eliminarRepuesto(repuesto) {
     const recuperarBaseDeDatosRepuesto = JSON.parse(localStorage.getItem('baseDeDatosRepuesto'));
@@ -272,6 +252,7 @@ export function mostrarRepuestos() {
             modalRepuestoCantidad.value = repuesto.cantidad;
             modalRepuestoImagen.value = repuesto.imagen;
             modificarTextoBotonEditarRepuesto();
+            habilitarInputsModalRepuesto();
             desHabilitarCodigoRepuestoInput();
             mostrarModal(modalRepuesto);
         });
@@ -305,13 +286,9 @@ export function mostrarRepuestos() {
             limpiarValoresModalAgregarRepuestoACarrito();
             mostrarModal(modalAgregarRepuestoACarrito);
         });
-
-
-
         deshabilitarBotonesAgregarEditarEliminarProducto();
     });
 }
-
 
 // Devuelve una Lista de Repuesto pero filtandola con el Buscador:
 
@@ -320,8 +297,6 @@ export function listarRepuestosConFiltro(nombreBuscar) {
     const listaRepuestosConFiltro = recuperarBaseDeDatosRepuesto.filter((repuesto) => repuesto.nombre.includes(nombreBuscar));
     return listaRepuestosConFiltro;
 }
-
-
 
 // Listar Repuestos con filtro:
 
@@ -341,6 +316,8 @@ export function repuestosConFiltro() {
         }
     }
 }
+
+// Listar Repuesto con filtro aplicado:
 
 function mostrarRepuestosConFiltro(listaFiltrada) {
     //Limpio la Lista de Repuestos;
@@ -385,5 +362,22 @@ function mostrarRepuestosConFiltro(listaFiltrada) {
         btnEliminarRepuesto.addEventListener('click', () => { alert("Error: Para Elimnar un Repuesto tiene que cargar la lista original sin filtros!"); });
         deshabilitarBotonesAgregarEditarEliminarProducto();
     });
+}
+
+//Actualizo el Stock de los repuesto cuando se finaliza un carrito:
+
+export function actualizarStockRepuestos(listaRepuestos) {
+    const recuperarBD = baseDeDatosRepuestos;
+    if (recuperarBD.length === 0) {
+        crearBDRepuestos();
+    } else {
+        if (listaRepuestos.length > 0) {
+            listaRepuestos.forEach((repuestoCarrito) => {
+                const repuestoBD = recuperarBD.find((repuesto) => parseInt(repuesto.codigoRepuesto) === repuestoCarrito.codigoRepuesto);
+                if (repuestoBD) {repuestoBD.cantidad -= repuestoCarrito.cantidad; }
+            });
+            localStorage.setItem('baseDeDatosRepuesto', JSON.stringify(baseDeDatosRepuestos));
+        }
+    }
 }
 

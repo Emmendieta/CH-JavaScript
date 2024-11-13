@@ -1,76 +1,54 @@
 /* -------------------------------- IMPORTACIONES -------------------------------- */
 
-import { Repuesto } from "./clases/repuesto.js";
-import { Usuario } from "./clases/usuario.js";
-import { inicializarBDCarrito, agregarRepuestoACarrito,actualizarMontototalCarrito, calcularMontoTotalCarrito } from "./funciones-clases/funciones-carrito.js";
-import { altaUsuario, inicializarBaseDatosUsuario, recuperarUsuarioDeBD, devolverCodigoUsuario, /* guardarSesionUsuario, verificarSesion */ } from "./funciones-clases/funciones-usuario.js";
-import { recuperarBDRepuestos, mostrarRepuestos, listarRepuestosConFiltro, altaRepuesto, repuestosConFiltro, listarRepuestos } from "./funciones-clases/funciones-repuesto.js";
+import { inicializarBDCarrito, agregarRepuestoACarrito,actualizarMontototalCarrito, calcularMontoTotalCarrito, devuelveCarritoPendienteUsuario } from "./funciones-clases/funciones-carrito.js";
+import { inicializarBaseDatosUsuario, devolverCodigoUsuario } from "./funciones-clases/funciones-usuario.js";
+import { recuperarBDRepuestos, mostrarRepuestos, repuestosConFiltro } from "./funciones-clases/funciones-repuesto.js";
 import { deshabilitarBotonesAgregarEditarEliminarProducto, deshabilitarBotonesAgregarProductoACarrito, devolverNombreUsuario } from "./funciones-clases/funciones-validaciones.js";
 import { iniciarLogin, validarDatosIngresados, cerrarSesion } from "./funciones-clases/funciones-botones.js";
 import { limpiarModalLogin, validarSignUp, limpiarDatosModalSingUp, confirmarAltaRepuesto, mostrarModal, limpiarDatosModalAltaRepuesto, cambiosEnCheckBoxModalRepuesto,
         restablecerBotonAltaRepuesto, habilitarInputsModalRepuesto, validarRepuestoAgregarACarrito, limpiarValoresModalAgregarRepuestoACarrito,
-        ocutalModal } from "./funciones-clases/funciones-modales.js";
+        ocutalModal, mostrarModalFinalizarCarrito } from "./funciones-clases/funciones-modales.js";       
 
 /* -------------------------------- CONSTANTES Y VARIABLES -------------------------------- */
 
-const btnLogin = document.getElementById('btnLogin');
+import { modalRepuesto, modalRepuestoBtnConfirm, modalRepuestoCheckBox, btnLogin, btnFinalizarCarrito, btnBuscarProducto, btnAltaRepuesto, modalLoginBtnX, modalLoginbtnCancel, 
+    modalBtnLogin, modalSingUpButton, modalSingUpX, modalSingUpCerrar, modalRepuestoBtnCerrar, modalRepuestoBtnX, modalAgregarRepuestoACarrito, 
+    modalAgregarRepuestoACarritoBtnConfirmar, pUserName, invitadoText, btnTextBuscarBuscar, btnTxtBuscarLimpiar } from "./variables-constantes.js"
 
-
-
-const sectionFormLogin = document.getElementById('hdNavSectionLogin');
-const singUpButton = document.getElementById('btnSingUp');
-
+/* const btnLogin = document.getElementById('btnLogin');
+const btnFinalizarCarrito = document.getElementById('btnCarrito');
 const btnBuscarProducto = document.getElementById('btnBuscarRepuesto');
-const btnAltaRepuesto = document.getElementById('btnAddRepuesto');
-
-//listarRepuestos
-//const listaRepuestos = listarRepuestos();
+const btnAltaRepuesto = document.getElementById('btnAddRepuesto'); */
 
 /* ---- Modal Login ---- */
 
-const modalLoginBtnX = document.getElementById('btnModalLoginX');
+/* const modalLoginBtnX = document.getElementById('btnModalLoginX');
 const modalLoginbtnCancel = document.getElementById('btnModalLoginCancel');
-const modalBtnLogin = document.getElementById('btnModalLogin');
+const modalBtnLogin = document.getElementById('btnModalLogin'); */
 
 /* ---- Modal Sing Up ---- */
 
-const modalSingUpButton = document.getElementById('btnModalSingUp');
+/* const modalSingUpButton = document.getElementById('btnModalSingUp');
 const modalSingUpX = document.getElementById('modalSingUpX');
-const modalSingUpCerrar = document.getElementById('btnModalsingUpCerrar');
+const modalSingUpCerrar = document.getElementById('btnModalsingUpCerrar'); */
 
 /* ---- Modal Repuesto ---- */
 
-const modalRepuesto = document.getElementById('modalRepuesto');
-const modalRepuestoCodigoRepuesto = document.getElementById('modalCodigoRepuesto');
-const modalRepuestoNombre = document.getElementById('modalNombreRepuesto');
-const modalRepuestoModelo = document.getElementById('modalModeloRepuesto');
-const modalRepuestoVehiculo = document.getElementById('modalVehiculoRepuesto');
-const modalRepuestoPrecio = document.getElementById('modalPrecioRepuesto');
-const modalRepuestoCantidad = document.getElementById('modalCantidadRepuesto');
-const modalRepuestoImagen = document.getElementById('modalImagenRepuesto');
+/* const modalRepuesto = document.getElementById('modalRepuesto');
 const modalRepuestoBtnConfirm = document.getElementById('btnModalConfirmRepuesto');
 const modalRepuestoCheckBox = document.getElementById('checkBoxRepuestoImagen');
 const modalRepuestoBtnCerrar = document.getElementById('btnModalAltaRepuestoCerrar');
-const modalRepuestoBtnX = document.getElementById('btnModalAltaRepuestoX');
+const modalRepuestoBtnX = document.getElementById('btnModalAltaRepuestoX'); */
 
 /* ---- Modal Agregar Repuesto a Carrito ---- */
 
-const modalAgregarRepuestoACarrito = document.getElementById('modalAgregarRepuestoACarrito');
+/* const modalAgregarRepuestoACarrito = document.getElementById('modalAgregarRepuestoACarrito');
 const modalAgregarRepuestoACarritoBtnConfirmar = document.getElementById('btnModalRepuestoCarritoConfirmar');
 
 const pUserName = document.getElementById('pUserName');
-const botonesAgregarCarrito = document.querySelectorAll('.btnAgregarProductoCarrito');
-const botonCarrito = document.getElementById('btnCarrito');
-const iconoCarrito = document.getElementById('iconoCarrito');
-
-
-// Se configuro repuestos como let porque con const no me trae los valores de cada repuesto
-
-const cerrarSesionText = "Cerrar Sesión";
-const loginText = "Iniciar Sesión";
 const invitadoText = "Usuario: Invitado";
 const btnTextBuscarBuscar = "Buscar";
-const btnTxtBuscarLimpiar = "Limpiar";
+const btnTxtBuscarLimpiar = "Limpiar"; */
 
 
 /* -------------------------------- LOGIN -------------------------------- */
@@ -174,15 +152,22 @@ btnBuscarProducto.addEventListener('click', (event) => {
         //Cambia el texto del boton buscar para que pueda realizar otra búsqueda:
         btnBuscarProducto.textContent = btnTextBuscarBuscar;
     }
-})
+});
 
+// Evento Mostrar Listado Completo Carrito para Finalizar:
 
-/* ---------------- MODAL AGREGAR REPUESTO A CARRTIO ---------------- */
+btnFinalizarCarrito.addEventListener('click', () => {
+    const nombreUsuario = devolverNombreUsuario();
+    const codigoUsuario = devolverCodigoUsuario(nombreUsuario);
+    mostrarModalFinalizarCarrito(codigoUsuario);
+});
+
+/* ---------------- MODAL AGREGAR REPUESTO A CARRITO ---------------- */
 
 modalAgregarRepuestoACarritoBtnConfirmar.addEventListener('click', () => {
     const repuesto = validarRepuestoAgregarACarrito();
     const nombreUsuario = devolverNombreUsuario();
-    const codigoUsuario = devolverCodigoUsuario(nombreUsuario)
+    const codigoUsuario = devolverCodigoUsuario(nombreUsuario);
         if (repuesto !== undefined) {
         agregarRepuestoACarrito(repuesto, codigoUsuario);
         const montoTotal = calcularMontoTotalCarrito(codigoUsuario);
@@ -191,8 +176,6 @@ modalAgregarRepuestoACarritoBtnConfirmar.addEventListener('click', () => {
         ocutalModal(modalAgregarRepuestoACarrito);
     }
 });
-
-
 
 /* -------------------------------- INICIALIZAR CUANDO SE CARGA LA PAGINA -------------------------------- */
 

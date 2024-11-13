@@ -1,30 +1,30 @@
-/* ---- IMPORTACIONES ---- */
+/* ---------------- IMPORTACIONES ---------------- */
 
-import {
-    validarUsuario, validarPassword, cambiarNombreBotonLoginIniciarSesion, cambiarNombreBotonLoginCerrarSesion,
-    cambiarTextoUsuarioLogueado, cambiarTextoUsuarioInvitado, habilitarBotonCarrito, habilitarIconoCarrito, deshabilitarBotonCarrito, dehabilitarIconoCarrito,
+import { validarUsuario, validarPassword, cambiarNombreBotonLoginIniciarSesion, cambiarNombreBotonLoginCerrarSesion, cambiarTextoUsuarioLogueado, 
+    cambiarTextoUsuarioInvitado, habilitarBotonCarrito, habilitarIconoCarrito, deshabilitarBotonCarrito, dehabilitarIconoCarrito,
     habilitarBotonesAgregarEditarEliminarProducto, deshabilitarBotonesAgregarEditarEliminarProducto, habilitarBotonesAgregarProductoACarrito,
-    deshabilitarBotonesAgregarProductoACarrito
-} from "./funciones-validaciones.js";
+    deshabilitarBotonesAgregarProductoACarrito, devolverNombreUsuario } from "./funciones-validaciones.js";
 import { mostrarModal, ocutalModal, limpiarModalLogin } from "./funciones-modales.js";
 import { recuperarUsuarioDeBD, devolverCodigoUsuario } from "./funciones-usuario.js";
-import { devuelveListaRepuestosDeCarritoPendiente } from "./funciones-carrito.js";
+import { devuelveListaRepuestosDeCarritoPendiente, finalizarCarritoEnBD,  } from "./funciones-carrito.js";
+
+/* ---------------- VARIABLES Y CONSTANTES ---------------- */
+
+import { modalLoginNombreUsuario, modalLoginPassword, btnLogin, singUpButton, nombreUsuarioLogueado, cerrarSesionText,loginText, modalLogin } from "../variables-constantes.js"
 
 /* ---- VARIABLES Y CONSTANTES ---- */
 
-const btnLogin = document.getElementById('btnLogin');
+/* const btnLogin = document.getElementById('btnLogin');
 const singUpButton = document.getElementById('btnSingUp');
 const nombreUsuarioLogueado = document.getElementById('pUserName');
 const cerrarSesionText = "Cerrar Sesión";
-const loginText = "Iniciar Sesión";
-const adminText = "Usuario: admin";
+const loginText = "Iniciar Sesión"; */
 
 /* ---- Modal Login: ---- */
 
-const modalLogin = document.getElementById('modalLogin');
+/* const modalLogin = document.getElementById('modalLogin');
 const modalLoginNombreUsuario = document.getElementById('nombreUsuarioLogin');
-const modalLoginPassword = document.getElementById('passwordLogin');
-const modalBtnLogin = document.getElementById('btnModalLogin');
+const modalLoginPassword = document.getElementById('passwordLogin'); */
 
 /* ---------------- LOGIN ---------------- */
 
@@ -62,8 +62,6 @@ export function validarDatosIngresados() {
             const codigoUsuario = devolverCodigoUsuario(usuarioValidado, passwordValidado);
             //Verifico que no existan carritos pendientes a nombre del Usuario:
             devuelveListaRepuestosDeCarritoPendiente(codigoUsuario);
-
-
             //En caso de que no exista o no coincida algo de los datos, se emite una alerta:
         } else { alert("Error: Usuario y/o Contraseña incorrectos, por favor verifiquelo!"); }
     }
@@ -107,6 +105,14 @@ function mostrarBotonSingUp() {
     if (btnLogin.textContent === cerrarSesionText) {
         singUpButton.style.display = 'block';
     };
+}
+
+//Funcion Finalizar Carrito:
+
+export function finalizarCarrito() {
+    const nombreUsuario = devolverNombreUsuario();
+    const codigoUsuario = devolverCodigoUsuario(nombreUsuario);
+    finalizarCarritoEnBD(codigoUsuario);
 }
 
 

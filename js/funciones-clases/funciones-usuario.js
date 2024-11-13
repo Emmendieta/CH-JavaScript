@@ -35,7 +35,7 @@ export function altaUsuario(usuario) {
             usuario.nombre,
             usuario.apellido,
             usuario.email,
-            usuario.telefono,
+            parseInt(usuario.telefono),
             usuario.direccion,
             usuario.ciudad,
             usuario.provincia,
@@ -89,7 +89,7 @@ function obtenerCodigoMax() {
     const recuperarBaseDeDatos = JSON.parse(localStorage.getItem("baseDeDatosUsuario"));
     if (recuperarBaseDeDatos.length !== 0) {
         const baseDeDatosOrdenadaInversamente = recuperarBaseDeDatos.sort((elementoA, elementoB) => elementoB.codigo - elementoA.codigo);
-        return baseDeDatosOrdenadaInversamente[0].codigo;
+        return parseInt(baseDeDatosOrdenadaInversamente[0].codigo);
     }
     else { alert("Error: No se pudo recuperar la información de la Base de Datos!"); }
 }
@@ -108,20 +108,6 @@ export function recuperarUsuarioDeBD(usuario, password) {
     }
 }
 
-/* // Recupero el Codigo Logueado con nombre usuario y password:
-
-export function devolverCodigoUsuario(usuario, password) {
-    const recuperarBaseDeDatos = JSON.parse(localStorage.getItem("baseDeDatosUsuario"));
-    if (recuperarBaseDeDatos.length === 0) { return false; }
-    else {
-        const usuarioEncontrado = recuperarBaseDeDatos.find((elemento) => elemento.nombreUsuario === usuario.toLowerCase());
-        if (usuarioEncontrado !== undefined) {
-            if (usuarioEncontrado.nombreUsuario === usuario.toLowerCase() && usuarioEncontrado.password === password) { return usuarioEncontrado.codigo; }
-            else { return -1; }
-        } else { return -1; }
-    }
-} */
-
 // Recupero el Codigo Logueado con nombre usuario:
 
 export function devolverCodigoUsuario(usuario) {
@@ -135,37 +121,3 @@ export function devolverCodigoUsuario(usuario) {
         } else { return -1; }
     }
 }
-
-// Mantener el Login si no pasa mas de 5 minutos:
-
-/* // Almacenar la sesión del usuario y la hora de login en localStorage:
-export function guardarSesionUsuario(usuario) {
-    const horaLogin = new Date().getTime(); // Hora actual en milisegundos
-    localStorage.setItem('usuarioActivo', usuario);
-    localStorage.setItem('horaLogin', horaLogin);
-}
-
-// Verificar si han pasado más de 5 minutos desde el último acceso:
-export function verificarSesion() {
-    const usuarioActivo = localStorage.getItem('usuarioActivo');
-    const horaLogin = localStorage.getItem('horaLogin');
-
-    if (usuarioActivo && horaLogin) {
-        const tiempoTranscurrido = new Date().getTime() - parseInt(horaLogin); // Tiempo en milisegundos
-
-        // Si han pasado más de 5 minutos (300,000 ms), redirigir a login
-        if (tiempoTranscurrido > 300000) {
-            alert("Tu sesión ha expirado, por favor vuelve a iniciar sesión.");
-            localStorage.removeItem('usuarioActivo'); // Eliminar sesión expirado
-            localStorage.removeItem('horaLogin');
-            return false;
-        } else {
-            pUserName.innerText = "Usuario: " + usuarioActivo; // Recuperar el usuario activo
-            return true;
-        }
-    } else if (usuarioActivo === null) { return false; }
-} */
-
-
-
-
