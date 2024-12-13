@@ -1,0 +1,246 @@
+/* ---- RESET CSS ---- */
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: auto;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+        "header header header"
+        "main main main" 
+        "footer footer footer";
+    column-gap: 20px;
+    min-height: 50vh;
+}
+
+/* --- ESTILOS GENERALES ---- */
+
+/* ---- HEADER ---- */
+
+#header {
+    grid-area: header;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#pUserName {
+    color: white;
+    margin: 5px 5px 5px 15px;
+}
+
+.hdNavSectImgLogo {
+    width: 50%;
+    height: auto;
+    margin: 15px 10px;
+}
+
+#btnLogin, #btnSingUp {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/* ---- Main ---- */
+
+#main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---- INDEX ---- */
+
+.mnSectRepuestos {
+    margin-bottom: 50px;
+}
+.mnSectArtTitulo {
+    text-align: center;
+    margin: 25px;
+    color: gold;
+    text-decoration: underline;
+    text-shadow: 5px 2px 5px grey;
+}
+
+.mnSectArtAdd {
+    display: none;
+    justify-content: end;
+    margin: 27px;
+}
+
+.mnSectArtRepuestos, #mnBottom{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    gap: 40px;
+}
+
+.card {
+    flex: 0 0 30%;
+    margin-bottom: 25px;
+    transition: 1s;
+}
+
+.card:hover {
+    transition: 1.5s;
+    box-shadow: grey 8px 8px 8px 12px;
+    
+}
+
+.card-img-top {
+    min-width: 120px;
+    max-width: 150px;
+    height: auto;
+    text-align: center;
+}
+
+.card-title, .card-text {
+    text-align: center;
+}
+
+.btnAgregarProductoCarrito {
+    opacity: 0.5;
+}
+
+.card-body-botones {
+    display: flex;  
+    justify-content: space-between;
+}
+
+.btnEdition {
+    display: flex;
+}
+
+.btnEditProducto, .btnDeleteProducto, .btnAgregarProductoCarrito {
+    margin: 5px 3px;
+}
+
+/* main carrito */
+
+.mnSectCarrito {
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    padding: 25px 15px;
+}
+
+.fa-cart-shopping {
+    color: orange;
+    transform: scale(1.5);
+    margin-right: 10px;
+    opacity: 0.5;
+}
+
+#btnCarrito {
+    margin: 15px;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+#globoCantidad {
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 40%;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0.5;
+}
+
+/* Modal Registrarse */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-group label, .form-group input {
+    margin: 2px;
+    font-size: 13px;
+}
+
+.form-group label {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ---- Modal Repuesto y Agregar Repuesto a Carrito ---- */
+
+.modalRepuestoCheck, .modalAgregarCarrito {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#checkBoxRepuestoImagen {
+    margin: 10px;
+}
+
+/* ---- Modal Finalizar Carrito ---- */
+
+.img-small {
+    height: 50px;
+    width: 10px;
+}
+
+/* ---- Footer ---- */
+
+#footer {
+    grid-area: footer;
+    background-color: rgb(43,48,53);
+    opacity: 1;
+    color: white;
+    
+}
+
+#footer .ftTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 3px gray solid;
+    padding: 15px;
+}
+.ftTopSectLink {
+    margin: 10px 5px;
+    padding-left: 10px;
+}
+
+#ftTopSectLinkInstagram {
+    color: rgb(170, 16, 16);
+}
+
+.ftBottom {
+    display: flex;
+    border-top: 3px gray solid; 
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+.ftBottomSectLink {
+    margin: 10px 5px;
+    padding-left: 10px;
+}
+
+.ftBottomSectP, .ftBottomSectLink i {
+    color: #F7C683;
+}
+
+
