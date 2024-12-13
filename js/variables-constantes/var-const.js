@@ -38,10 +38,6 @@ export const textEliminarRepuesto = "Eliminar Repuesto";
 
 export const modalAgregarRepuestoACarritoLabelCodigoRepuesto = document.getElementById('modalRepuestoCarritoLabelCodigoRepuesto');
 export const modalAgregarRepuestoACarritoInputCantidad = document.getElementById('modalRepuestoCarritoCantidad');
-
-
-
-
 export const btnFinalizarCarrito = document.getElementById('btnCarrito');
 export const btnBuscarProducto = document.getElementById('btnBuscarRepuesto');
 export const btnAltaRepuesto = document.getElementById('btnAddRepuesto');
@@ -60,7 +56,6 @@ export const modalSingUpCerrar = document.getElementById('btnModalsingUpCerrar')
 
 /* ---- Modal Repuesto ---- */
 
-
 export const modalRepuestoBtnCerrar = document.getElementById('btnModalAltaRepuestoCerrar');
 export const modalRepuestoBtnX = document.getElementById('btnModalAltaRepuestoX');
 
@@ -74,14 +69,10 @@ export const modalAgregarRepuestoACarritoModeloRepuesto = document.getElementByI
 export const modalAgregarRepuestoACarritoVehiculoRepuesto = document.getElementById('modalRepuestoCarritoLabelVehiculoRepuesto');
 export const modalAgregarRepuestoACarritoPrecioRepuesto = document.getElementById('modalRepuestoCarritoLabelPrecioRepuesto');
 export const modalAgregarRepuestoACarritoCantidadRepuesto = document.getElementById('modalRepuestoCarritoLabelCantidadRepuesto');
-
-
 export const btnTextBuscarBuscar = "Buscar";
 export const btnTxtBuscarLimpiar = "Limpiar";
 
-
 /* ---- VARIABLES Y CONSTANTES ---- */
-
 
 export const nombreUsuarioLogueado = document.getElementById('pUserName');
 export const cerrarSesionText = "Cerrar Sesión";
@@ -91,20 +82,14 @@ export const loginText = "Iniciar Sesión";
 
 export const modalLogin = document.getElementById('modalLogin');
 
-
 /* ---------------- VARIABLES Y CONSTANTES ---------------- */
 
 export const btnCarrito = document.getElementById('btnCarrito');
 export const iconoCarrito = document.getElementById('iconoCarrito');
-
 export const mnSectArtAdd = document.querySelector('.mnSectArtAdd');
 export const adminText = "Usuario: admin";
 export const invitadoText = "Usuario: Invitado";
-
-
 export const contenedorRepuestos = document.querySelector('.mnSectArtRepuestos');
-
-
 export const demora1000 = 500;
 export const demoraCargarRepuestos = 500;
 export const demoraCargarUsuario = 500;
