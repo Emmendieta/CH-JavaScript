@@ -1,13 +1,10 @@
 /* ---------------- IMPORTACIONES ---------------- */
 
-
 import { cerrarSesion, iniciarLogin } from "../../funciones/funciones-usuario.js";
 import { errorSweetAlert2 } from "../../sweet-alert-2/funciones-sweet-alert-2.js";
 import { invitadoText, loginText, cerrarSesionText, btnTextBuscarBuscar, btnTxtBuscarLimpiar, adminText, dobleDemoraCargarRepuestos } from "../../variables-constantes/var-const.js";
 import { iniciarSingUp } from "../main-html/modales-html/modal-sing-up.js";
 import { crearContenidoRepuestoBottom, habilitarBotonesAgregarEditarEliminarProducto, habilitarBotonesAgregarProductoACarrito } from "../main-html/repuestos-html.js";
-
-// FALTA CORREGIR LAS CONSTANTES Y VARIABLES EN OTRO ARCHIVO
 
 /* ---------------- AGREGAR CONTENIDO AL HEADER ---------------- */
 
@@ -65,6 +62,12 @@ export function crearContenidoEnHeader() {
     const btnBuscarProducto = navbarContainter.querySelector(`#btnBuscarRepuesto`);
     btnBuscarProducto.addEventListener('click', (event) => {
         if (btnBuscarProducto.textContent === btnTextBuscarBuscar) {
+            const textoBuscadorRepuesto = navbarContainter.querySelector('#textoBuscadorRepuesto');
+            if (textoBuscadorRepuesto.value === "") { 
+                event.preventDefault();
+                errorSweetAlert2("Error: No se puede buscar un Repuesto por un nombre nulo!"); 
+            }
+            else if (textoBuscadorRepuesto.value !== "") {
             //Evita que se recargue la pagina de forma completa!
             event.preventDefault();
             //Filta los elementos buscados con la funcion:
@@ -75,6 +78,7 @@ export function crearContenidoEnHeader() {
                     habilitarBotonesAgregarProductoACarrito();
                     if (nombreUsuarioLogueado.innerText === adminText) { habilitarBotonesAgregarEditarEliminarProducto(); }
                 }}, dobleDemoraCargarRepuestos);
+            }
         } else if (btnBuscarProducto.textContent === btnTxtBuscarLimpiar) {
             //Evita que se recargue la pagina de forma completa!
             event.preventDefault();
@@ -162,4 +166,3 @@ export function cambiarTextoUsuarioInvitado() {
     } catch (error) {errorSweetAlert2("Error Inesperado. Error: " + error);}
     finally {}    
 }
-

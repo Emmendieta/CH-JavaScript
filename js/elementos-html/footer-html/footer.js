@@ -1,11 +1,3 @@
-
-
-
-// FALTA CORREGIR LAS CONSTANTES Y VARIABLES EN OTRO ARCHIVO
-
-
-/* ---------------- AGREGAR CONTENIDO AL FOOTER ---------------- */
-
 export function crearContenidoFooter() {
     const contenedorFooter = document.getElementById('footer');
     // Creo los elementos:

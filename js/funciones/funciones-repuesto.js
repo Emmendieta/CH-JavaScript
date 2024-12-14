@@ -183,7 +183,6 @@ export async function procesoABMRepuesto(repuesto, opcion) {
     }
     //Proceso completo para eliminar a un Repuesto:
     else if (opcion === 3) {
-
         resultado = await eliminarRepuesto(repuesto);
         if (resultado === true) {
             crearContenidoRepuestoBottom(1);

@@ -75,36 +75,36 @@ export async function crearContenidoModalFinalizarCarrito() {
                         <h6 id="h6infoTarjeta">Importante: No se almacenará la información de su tarjeta de credito</h6>
                         <div class="mb-3">
                             <label for="nombreTarjeta" class="form-label">Nombre del Titular</label>
-                            <input type="text" class="form-control" id="nombreTarjeta" placeholder="Nombre completo" required value="algo">
+                            <input type="text" class="form-control" id="nombreTarjeta" placeholder="Nombre completo" required>
                         </div>
                         <div class="mb-3">
                             <label for="numeroTarjeta" class="form-label">Primeros 4 números de la Tarjeta</label>
-                            <input type="text" class="form-control" id="numeroTarjeta1" placeholder="XXXX" required value="5555">
+                            <input type="text" class="form-control" id="numeroTarjeta1" placeholder="XXXX" required>
                         </div>
                         <div class="mb-3">
                             <label for="numeroTarjeta" class="form-label">Segundos 4 números de la Tarjeta</label>
-                            <input type="text" class="form-control" id="numeroTarjeta2" placeholder="XXXX" required value="5555">
+                            <input type="text" class="form-control" id="numeroTarjeta2" placeholder="XXXX" required>
                         </div>
                                                 <div class="mb-3">
                             <label for="numeroTarjeta" class="form-label">Terceros 4 números de la Tarjeta</label>
-                            <input type="text" class="form-control" id="numeroTarjeta3" placeholder="XXXX" required value="5555">
+                            <input type="text" class="form-control" id="numeroTarjeta3" placeholder="XXXX" required>
                         </div>
                                                 <div class="mb-3">
                             <label for="numeroTarjeta" class="form-label">Cuartos 4 números de la Tarjeta</label>
-                            <input type="text" class="form-control" id="numeroTarjeta4" placeholder="XXXX" required value="5555">
+                            <input type="text" class="form-control" id="numeroTarjeta4" placeholder="XXXX" required>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="mesExpiracion" class="form-label">Mes de Expiración</label>
-                                <input type="number" class="form-control" id="mesExpiracion" required value="02"> 
+                                <input type="number" class="form-control" id="mesExpiracion" required> 
                             </div>
                             <div class="col-md-6 mb-3">
                             <label for="anioExpiracion" class="form-label">Año de Expiración</label>
-                            <input type="number" class="form-control" id="anioExpiracion" required value="2025">
+                            <input type="number" class="form-control" id="anioExpiracion" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="codigoSeguridad" class="form-label">Código de Seguridad (CVV)</label>
-                                <input type="text" class="form-control" id="codigoSeguridad" placeholder="CVV" required value="369">
+                                <input type="text" class="form-control" id="codigoSeguridad" placeholder="CVV">
                             </div>
                         </div>
                     </div>
@@ -250,8 +250,6 @@ export async function crearContenidoModalFinalizarCarrito() {
         });
     });
 }
-
-
 
 function validarDatosTarjetaDeCredito() {
     try {

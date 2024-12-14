@@ -2,7 +2,6 @@ import { validarSignUp } from "../../../funciones/funciones-usuario.js";
 import { errorSweetAlert2 } from "../../../sweet-alert-2/funciones-sweet-alert-2.js";
 import { ocutalModal } from "./funciones-modal.js";
 
-
 function crearContenidoModalSingUp() {
     const contenderMain = document.getElementById('main');
     //Si existe el modal lo elimino y lo recargo:
@@ -81,7 +80,6 @@ function crearContenidoModalSingUp() {
         </div>
     `;
     contenderMain.appendChild(modalSingUpContainer);
-
     //Boton X del Modal SingUp:
     const btnModalSingUpX = modalSingUpContainer.querySelector('#modalSingUpX');
     btnModalSingUpX.addEventListener('click', () => {

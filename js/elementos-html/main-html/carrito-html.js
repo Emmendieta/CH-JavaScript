@@ -5,7 +5,6 @@ import { demoraCargarCantidadRepuestosEnCarrito } from "../../variables-constant
 import { mostrarModal } from "./modales-html/funciones-modal.js";
 import { crearContenidoModalFinalizarCarrito } from "./modales-html/modal-finalizar-carrito.js";
 
-
 export function crearContenidoCarritoEnMainBottom() {
     const contenedorMain = document.getElementById('main');
     //Verifico si lo tengo que eliminar y recargar:
@@ -17,9 +16,7 @@ export function crearContenidoCarritoEnMainBottom() {
     carritoContainer.classList.add('mnSectCarrito');
     //Contenido del Carrito:
     carritoContainer.innerHTML = `
-    <article class="mnSectCarritoProductos">
-
-    </article>
+    <article class="mnSectCarritoProductos"></article>
     <article class="mnSectCarritoFinalizar">
         <button type="button" class="btn btn-danger" id="btnCarrito">Finalizar Carrito</button>
         <i class="fa-solid fa-cart-shopping fa-xl" id="iconoCarrito"></i>

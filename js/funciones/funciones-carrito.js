@@ -1,6 +1,6 @@
 import { baseDeDatosCarrito } from "../base-datos/bd-carrito.js";
 import { Carrito} from "../clases/carrito.js";
-import { errorSweetAlert2, pendingSweetAlert2 } from '../sweet-alert-2/funciones-sweet-alert-2.js'
+import { errorSweetAlert2 } from '../sweet-alert-2/funciones-sweet-alert-2.js'
 import { actualizarStockRepuestos } from "./funciones-repuesto.js";
 
 // Fetch de Carritos:
@@ -230,8 +230,8 @@ export async function eliminarRepuestoDeCarritoPendiente(repuesto, codigoUsuario
                 let montoFinal = 0;
                 if (carritoPendiente.listaRepuestos.length === 0) { carritoPendiente.montoTotal = 0; }
                 else {
-                    montoTotal = await calcularMontoTotalCarrito(codigoUsuario);
-                    carritoPendiente.montoTotal = parseFloat(montoFinal);
+                    montoFinal = await calcularMontoTotalCarrito(codigoUsuario);
+                    carritoPendiente.montoFinal = parseFloat(montoFinal);
                 }
                 //Actualizo la BD:
                 localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD));
@@ -256,12 +256,18 @@ export async function calcularMontoTotalCarrito(codigoUsuario) {
             if(listaRepuestos.length === 0) { return montoTotal; }
             else {
                 listaRepuestos.forEach((repuesto) => {
-                    montoTotal += repuesto.cantidad * repuesto.precio;
+                    montoTotal += parseInt(repuesto.cantidad) * parseFloat(repuesto.precio);
                 });
                 return montoTotal;
             }
-        } else { errorSweetAlert2("Error: No se pudo recuperar el Carrito del Cliente solicitado!"); }
-    } else { errorSweetAlert2("Error: No se pudo recuperar correctamente la Base de Datos de los Carritos!"); }
+        } else { 
+            errorSweetAlert2("Error: No se pudo recuperar el Carrito del Cliente solicitado!");
+            return 0;
+        }
+    } else { 
+        errorSweetAlert2("Error: No se pudo recuperar correctamente la Base de Datos de los Carritos!"); 
+        return 0;
+    }
 }
 
 //Funcion finalizar carrito:

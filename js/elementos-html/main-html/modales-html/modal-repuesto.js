@@ -4,7 +4,6 @@ import { adminText,  timerHabilitarBotones} from "../../../variables-constantes/
 import { habilitarBotonesAgregarEditarEliminarProducto, habilitarBotonesAgregarProductoACarrito } from "../repuestos-html.js";
 import { ocutalModal } from "./funciones-modal.js";
 
-
 export function crearContenidoModalRepuesto(agregarRepuesto, opcion) {
     try {
         const contenedorMain = document.getElementById('main');
@@ -33,27 +32,27 @@ export function crearContenidoModalRepuesto(agregarRepuesto, opcion) {
                                 <form action="" id="formAltaRepuesto">
                                     <div class="form-group">
                                         <label for="modalCodigoRepuesto">Codigo del Repuesto:</label>
-                                        <input type="number" id="modalCodigoRepuesto" name="codigoRepuesto" required value="10000008">
+                                        <input type="number" id="modalCodigoRepuesto" name="codigoRepuesto" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="modalNombreRepuesto">Nombre:</label>
-                                        <input type="text" id="modalNombreRepuesto" name="nombre" required value="algo">
+                                        <input type="text" id="modalNombreRepuesto" name="nombre" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="modalModeloRepuesto">Modelo:</label>
-                                        <input type="number" id="modalModeloRepuesto" name="modelo" required value="2015">
+                                        <input type="number" id="modalModeloRepuesto" name="modelo" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="modalVehiculoRepuesto">Vehículo:</label>
-                                        <input type="text" id="modalVehiculoRepuesto" name="vehiculo" required value="algo">
+                                        <input type="text" id="modalVehiculoRepuesto" name="vehiculo" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="modalPrecioRepuesto">Precio:</label>
-                                        <input type="number" id="modalPrecioRepuesto" name="precio" required value="15.99">
+                                        <input type="number" id="modalPrecioRepuesto" name="precio" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="modalCantidadRepuesto">Cantidad:</label>
-                                        <input type="number" id="modalCantidadRepuesto" name="cantidad" required value="100">
+                                        <input type="number" id="modalCantidadRepuesto" name="cantidad" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="modalImagenRepuesto">URL de la imágen del Repuesto:</label>

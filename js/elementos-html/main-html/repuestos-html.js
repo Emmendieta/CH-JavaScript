@@ -57,8 +57,7 @@ export async function crearContenidoRepuestoBottom(opcion) {
             lista = await procesoFiltrarRepuestos(); 
             if (lista.length === 0) { 
                 lista = await listarRepuestos(); 
-                alertSweetAlert2("Error al buscar el Repuesto:", "No se encontró ningun repuesto con el valor ingresado, por favor verifique que este todo correcto!");
-                
+                alertSweetAlert2("Error al buscar el Repuesto:", "No se encontró ningun repuesto con el valor ingresado, por favor verifique que este todo correcto!");         
             }
         }
         //Contenido en la section Bottom del main:
@@ -152,7 +151,7 @@ export function habilitarBotonesAgregarEditarEliminarProducto() {
     }
 }
 
-//Funcion para deshabilitar los botones de edicion/eliminacion de Repuestos: FALTA CORREGIR ACAAAAAA!!!!
+//Funcion para deshabilitar los botones de edicion/eliminacion de Repuestos:
 
 export function deshabilitarBotonesAgregarEditarEliminarProducto() {
     try {

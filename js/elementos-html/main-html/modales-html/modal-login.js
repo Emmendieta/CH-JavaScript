@@ -1,7 +1,6 @@
 import { ocutalModal } from "./funciones-modal.js";
 import { validarDatosIngresados } from "../../../funciones/funciones-usuario.js";
 
-
 export function crearContenidoModalLogin() {
     const contenedorMain = document.getElementById('main');
     //Si existe el modal lo elimino y lo recargo:
@@ -26,11 +25,11 @@ export function crearContenidoModalLogin() {
                 <form action="" id="formLogin">
                     <div class="form-group">
                         <label for="nombreUsuarioLogin">Nombre Usuario:</label>
-                        <input type="text" id="nombreUsuarioLogin" name="nombreUsuarioLogin" required value="Admin">
+                        <input type="text" id="nombreUsuarioLogin" name="nombreUsuarioLogin" required>
                     </div>
                     <div class="form-group">
                         <label for="passwordLogin">Password:</label>
-                        <input type="password" id="passwordLogin" name="passwordLogin" required value="Admin1234">
+                        <input type="password" id="passwordLogin" name="passwordLogin" required>
                     </div>
                 </form>
             </div>
@@ -42,19 +41,16 @@ export function crearContenidoModalLogin() {
     </div> 
     `;
     contenedorMain.appendChild(modalLoginContainer);
-
     //Boton X del Modal Login:
     const btnModalLoginX = modalLoginContainer.querySelector('#btnModalLoginX');
     btnModalLoginX.addEventListener('click', () => {
         ocutalModal('modalLogin');
     });
-
     //Boton Close del Modal Login:
     const btnModalLoginCancel = modalLoginContainer.querySelector('#btnModalLoginCancel');
     btnModalLoginCancel.addEventListener('click', () => {
         ocutalModal('modalLogin');
     });
-
     //Boton Login del Modal Login:
     const btnModalLogin = modalLoginContainer.querySelector('#btnModalLogin');
     btnModalLogin.addEventListener('click', () => {
