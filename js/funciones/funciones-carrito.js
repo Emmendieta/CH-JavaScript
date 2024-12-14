@@ -1,6 +1,6 @@
 import { baseDeDatosCarrito } from "../base-datos/bd-carrito.js";
 import { Carrito} from "../clases/carrito.js";
-import { errorSweetAlert2 } from '../sweet-alert-2/funciones-sweet-alert-2.js'
+import { errorSweetAlert2, pendingSweetAlert2 } from '../sweet-alert-2/funciones-sweet-alert-2.js'
 import { actualizarStockRepuestos } from "./funciones-repuesto.js";
 
 // Fetch de Carritos:
@@ -150,12 +150,22 @@ export async function agregarRepuestoACarrito(repuesto, codigoUsuario) {
                     repuestoExistente.cantidad = repuesto.cantidad;  
                     //Actualizo la BD:
                     localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD));
+                    //Actualizo el monto total del carrito:
+                    const montoTotal = await calcularMontoTotalCarrito(codigoUsuario);
+                    carritoEncontrado.montoTotal = parseFloat(montoTotal);
+                    //Actualizo la BD:
+                    localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD));
                     return true;
                 }                
             }
             //En caso de que el repuesto no exista en el carrito, lo agrego a la lista:
             else { 
                 listaRepuestos.push(repuesto); 
+                //Actualizo la BD:
+                localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD));
+                //Actualizo el monto total del carrito:
+                const montoTotal = await calcularMontoTotalCarrito(codigoUsuario);
+                carritoEncontrado.montoTotal = parseFloat(montoTotal);
                 //Actualizo la BD:
                 localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD));
                 return true; 
@@ -210,13 +220,21 @@ export async function eliminarRepuestoDeCarritoPendiente(repuesto, codigoUsuario
                 listaRepuestos = listaRepuestos.filter((repuestoEnLista) => parseInt(repuestoEnLista.codigoRepuesto) !== parseInt(repuesto.codigoRepuesto));
                 carritoPendiente.listaRepuestos = listaRepuestos;
                 // Aseguramos que la baseDeDatosCarrito esté actualizado
-                const baseDeDatosCarrito = recuperarBD; // Aseguramos que baseDeDatosCarrito existe
+                const baseDeDatosCarrito = recuperarBD; 
                 const carritoIndex = baseDeDatosCarrito.findIndex((carrito) => carrito.codigoUsuario === codigoUsuario);
                 if (carritoIndex !== -1) { baseDeDatosCarrito[carritoIndex] = carritoPendiente;
                 } else { baseDeDatosCarrito.push(carritoPendiente); }
                 // Guardamos la base de datos actualizada en localStorage
                 localStorage.setItem("baseDeDatosCarrito", JSON.stringify(baseDeDatosCarrito));
-                //localStorage.setItem("baseDeDatosCarrito", JSON.stringify(baseDeDatosCarrito));
+                //Actualizo el monto total del carrito:
+                let montoFinal = 0;
+                if (carritoPendiente.listaRepuestos.length === 0) { carritoPendiente.montoTotal = 0; }
+                else {
+                    montoTotal = await calcularMontoTotalCarrito(codigoUsuario);
+                    carritoPendiente.montoTotal = parseFloat(montoFinal);
+                }
+                //Actualizo la BD:
+                localStorage.setItem("baseDeDatosCarrito", JSON.stringify(recuperarBD));
                 return true;
             }
         }

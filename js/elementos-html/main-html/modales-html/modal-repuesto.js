@@ -76,18 +76,26 @@ export function crearContenidoModalRepuesto(agregarRepuesto, opcion) {
                     </div>
                 `;
                 contenedorMain.appendChild(modalRepuestoContainer);
-                const btnModalRepuestoX = modalRepuestoContainer.querySelector('#btnModalAltaRepuestoX');
-                const btnModalRepuestoCerrar = modalRepuestoContainer.querySelector('#btnModalAltaRepuestoCerrar');
                 const btnModalRepuestoAlta = modalRepuestoContainer.querySelector("#btnModalConfirmRepuesto");
-                //Métodos cuando se hace Click en X o en Cerrar:
-                btnModalRepuestoX.addEventListener('click', () => ocutalModal('modalRepuesto'));
-                btnModalRepuestoCerrar.addEventListener('click', () => ocutalModal('modalRepuesto'));
+                const checkBoxRepuestoImagen = modalRepuestoContainer.querySelector('#checkBoxRepuestoImagen');
+                const modalImagenRepuesto = document.getElementById('modalImagenRepuesto');
+                checkBoxRepuestoImagen.addEventListener('change', () => {
+                    if (checkBoxRepuestoImagen.checked) { 
+                        modalImagenRepuesto.disabled = true;
+                        modalImagenRepuesto.value = "https://github.com/Emmendieta/CH-JavaScript/blob/main/images/Imagen-no-disponible.png?raw=true";
+                    } else { 
+                        modalImagenRepuesto.disabled = false; 
+                        modalImagenRepuesto.value = "";
+                    }
+                });
                 //Método para el Alta de un nuevo Repuesto:
                 btnModalRepuestoAlta.addEventListener('click', async () => {
                     const repuestoValidado = validarAltaProducto();
                     if (repuestoValidado != null) {
                         try {
-                            const resultado = await productoABMSweetAlert2( "Alta Repuesto:", `¿Estás seguro que quieres dar el alta al Repuesto: ${repuestoValidado.nombre}?`, `Feliciades! Se ha dado el alta correctamente al repuesto: ${repuestoValidado.nombre}`, `Ok! No se procedió a dar el alta al repuesto: ${repuestoValidado.nombre}`, repuestoValidado.imagen, () => procesoABMRepuesto(repuestoValidado, 1));
+                            const resultado = await productoABMSweetAlert2( "Alta Repuesto:", `¿Estás seguro que quieres dar el alta al Repuesto: ${repuestoValidado.nombre}?`, 
+                                `Feliciades! Se ha dado el alta correctamente al repuesto: ${repuestoValidado.nombre}`, 
+                                `Ok! No se procedió a dar el alta al repuesto: ${repuestoValidado.nombre}`, repuestoValidado.imagen, () => procesoABMRepuesto(repuestoValidado, 1));
                             if (resultado) {
                                 setTimeout(() => {
                                     ocutalModal('modalRepuesto');
@@ -161,16 +169,24 @@ export function crearContenidoModalRepuesto(agregarRepuesto, opcion) {
                     `;
                     contenedorMain.appendChild(modalRepuestoContainer);
                     const btnModalRepuestoModificar = modalRepuestoContainer.querySelector('#btnModalModifyRepuesto');
-                    const btnModalRepuestoXModificar = modalRepuestoContainer.querySelector('#btnModalAltaRepuestoX');
-                    const btnModalRepuestoCerrarModificar = modalRepuestoContainer.querySelector('#btnModalAltaRepuestoCerrar');
-                    //Métodos cuando se hace Click en X o en Cerrar:
-                    btnModalRepuestoXModificar.addEventListener('click', () => ocutalModal('modalRepuesto'));
-                    btnModalRepuestoCerrarModificar.addEventListener('click', () => ocutalModal('modalRepuesto'));  
+                    const checkBoxRepuestoImagenEdit = modalRepuestoContainer.querySelector('#checkBoxRepuestoImagen');
+                    const modalImagenRepuestoEdit = document.getElementById('modalImagenRepuesto');
+                    checkBoxRepuestoImagenEdit.addEventListener('change', () => {
+                        if (checkBoxRepuestoImagenEdit.checked) {
+                            modalImagenRepuestoEdit.disabled = true;
+                            modalImagenRepuestoEdit.value = "https://github.com/Emmendieta/CH-JavaScript/blob/main/images/Imagen-no-disponible.png?raw=true";
+                        } else { 
+                            modalImagenRepuestoEdit.disabled = false; 
+                            modalImagenRepuestoEdit.value = "";
+                        }
+                    }); 
                     //Método para Editar un Repuesto:
                     btnModalRepuestoModificar.addEventListener('click', () => {
                         const repuestoValidado = validarAltaProducto();
                         if (repuestoValidado != null) {
-                            productoABMSweetAlert2( "Modificar Repuesto:", `¿Estás seguro que quieres modificar el Repuesto: ${repuestoValidado.nombre}?`, `Feliciades! Se ha modificado correctamente al repuesto: ${repuestoValidado.nombre}`, `Ok! No se procedió a modificar al repuesto: ${repuestoValidado.nombre}`, repuestoValidado.imagen, () => procesoABMRepuesto(repuestoValidado, 2))
+                            productoABMSweetAlert2( "Modificar Repuesto:", `¿Estás seguro que quieres modificar el Repuesto: ${repuestoValidado.nombre}?`, 
+                                `Feliciades! Se ha modificado correctamente al repuesto: ${repuestoValidado.nombre}`, 
+                                `Ok! No se procedió a modificar al repuesto: ${repuestoValidado.nombre}`, repuestoValidado.imagen, () => procesoABMRepuesto(repuestoValidado, 2))
                             .then((resultado) => {
                                 if (resultado) {
                                     setTimeout(() => {
@@ -241,16 +257,15 @@ export function crearContenidoModalRepuesto(agregarRepuesto, opcion) {
                 `;
                 contenedorMain.appendChild(modalRepuestoContainer);
                 const btnModalRepuestoEliminar = modalRepuestoContainer.querySelector('#btnModalDeleteRepuesto');
-                const btnModalRepuestoXDelete = modalRepuestoContainer.querySelector('#btnModalAltaRepuestoX');
-                const btnModalRepuestoCerrarDelete = modalRepuestoContainer.querySelector('#btnModalAltaRepuestoCerrar');
-                //Métodos cuando se hace Click en X o en Cerrar:
-                btnModalRepuestoXDelete.addEventListener('click', () => ocutalModal('modalRepuesto'));
-                btnModalRepuestoCerrarDelete.addEventListener('click', () => ocutalModal('modalRepuesto'));                
+                const checkBoxRepuestoImagenDelete = modalRepuestoContainer.querySelector('#checkBoxRepuestoImagen');             
+                checkBoxRepuestoImagenDelete.disabled = true;
                 //Método para Eliminar un Repuesto:
                 btnModalRepuestoEliminar.addEventListener('click', () => {
                     const repuestoValidado = validarAltaProducto();
                     if (repuestoValidado != null) {
-                        productoABMSweetAlert2( "Eliminar Repuesto:", `¿Estás seguro que quieres eliminar al Repuesto: ${repuestoValidado.nombre}?`, `Feliciades! Se ha eliminado correctamente al repuesto: ${repuestoValidado.nombre}`, `Ok! No se procedió a eliminar al repuesto: ${repuestoValidado.nombre}`, repuestoValidado.imagen, () => procesoABMRepuesto(repuestoValidado, 3))
+                        productoABMSweetAlert2( "Eliminar Repuesto:", `¿Estás seguro que quieres eliminar al Repuesto: ${repuestoValidado.nombre}?`, 
+                            `Feliciades! Se ha eliminado correctamente al repuesto: ${repuestoValidado.nombre}`, 
+                            `Ok! No se procedió a eliminar al repuesto: ${repuestoValidado.nombre}`, repuestoValidado.imagen, () => procesoABMRepuesto(repuestoValidado, 3))
                         .then((resultado) => {
                             if (resultado) {
                             setTimeout(() => {

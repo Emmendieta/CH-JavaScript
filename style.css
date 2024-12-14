@@ -199,6 +199,23 @@ body {
     width: 10px;
 }
 
+#divFormaPago {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#divCheckBoxFormaPago {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 15px;
+}
+
+#h6infoTarjeta {
+    color: red;
+}
+
 /* ---- Footer ---- */
 
 #footer {

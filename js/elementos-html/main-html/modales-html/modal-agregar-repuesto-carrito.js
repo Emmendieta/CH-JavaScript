@@ -65,17 +65,18 @@ export function crearContenidoModalAgregarRepuestoCarrito(agregarRepuesto) {
         </div>
     `;
     contenedorMain.appendChild(modalAgregarRepuestoCarritoContainer);
-    //Boton X:
+/*     //Boton X:
     const btnModalAgregarRepuestoCarritoX = document.getElementById('btnModalAgregarRepuestoCarritoX');
     btnModalAgregarRepuestoCarritoX.addEventListener('click', () => ocutalModal('modalAgregarRepuestoACarrito'));
     //Boton Cerrar:
     const btnModalAgregarRepuestaCarritoCerrar = document.getElementById('btnModalRepuestoCarritoCerrar');
-    btnModalAgregarRepuestaCarritoCerrar.addEventListener('click', () => ocutalModal('modalAgregarRepuestoACarrito'));
+    btnModalAgregarRepuestaCarritoCerrar.addEventListener('click', () => ocutalModal('modalAgregarRepuestoACarrito')); */
     //Boton Agregar Repuesto a Carrito:
     const btnModalRepuestoCarritoConfirmar = modalAgregarRepuestoCarritoContainer.querySelector('#btnModalRepuestoCarritoConfirmar');
     btnModalRepuestoCarritoConfirmar.addEventListener('click', async () => {
         const cantidad = modalAgregarRepuestoCarritoContainer.querySelector("#modalRepuestoCarritoCantidad");
-        const repuesto = new Repuesto(0, parseInt(agregarRepuesto.codigoRepuesto), agregarRepuesto.nombre, parseInt(agregarRepuesto.modelo), agregarRepuesto.vehiculo, parseFloat(agregarRepuesto.precio), parseInt(cantidad.value), agregarRepuesto.imagen);
+        const repuesto = new Repuesto(0, parseInt(agregarRepuesto.codigoRepuesto), agregarRepuesto.nombre, parseInt(agregarRepuesto.modelo), 
+        agregarRepuesto.vehiculo, parseFloat(agregarRepuesto.precio), parseInt(cantidad.value), agregarRepuesto.imagen);
         const repuestoEnBD = await listarRepuestoPorCodigoRepuesto(repuesto.codigoRepuesto);
         if (repuestoEnBD !== null) {
             if (repuestoEnBD.cantidad >= repuesto.cantidad) {
