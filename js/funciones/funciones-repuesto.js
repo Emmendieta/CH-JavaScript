@@ -48,14 +48,14 @@ async function devuelveBDRepuestos() {
 
 function crearBDRepuestos() {
     let nuevaBDRepuestos = [];
-    const repuesto1 = new Repuesto(1, 10000000, "Retrovisores", 2011, "Astra", 123.55, 15, "https://http2.mlstatic.com/D_NQ_NP_707465-MLA75573563840_042024-O.webp");
-    const repuesto2 = new Repuesto(2, 10000001, "Parabrisas", 2011, "Astra", 1000.00, 15, "https://http2.mlstatic.com/D_NQ_NP_814707-MLA75396323622_042024-O.webp");
-    const repuesto3 = new Repuesto(3, 10000002, "Volante", 2011, "Astra", 750.99, 10, "https://http2.mlstatic.com/D_797387-MLA51898968943_102022-C.jpg");
+    const repuesto1 = new Repuesto(1, 10000000, "Retrovisores", 2011, "Astra", 123.55, 50, "https://http2.mlstatic.com/D_NQ_NP_707465-MLA75573563840_042024-O.webp");
+    const repuesto2 = new Repuesto(2, 10000001, "Parabrisas", 2011, "Astra", 1000.00, 30, "https://http2.mlstatic.com/D_NQ_NP_814707-MLA75396323622_042024-O.webp");
+    const repuesto3 = new Repuesto(3, 10000002, "Volante", 2011, "Astra", 750.99, 20, "https://http2.mlstatic.com/D_797387-MLA51898968943_102022-C.jpg");
     const repuesto4 = new Repuesto(4, 10000003, "Bujías x 4", 2011, "Astra", 250.55, 100, "https://http2.mlstatic.com/D_NQ_NP_960535-MLA31040323720_062019-O.webp");
-    const repuesto5 = new Repuesto(5, 10000004, "Amortiguadores x 4", 2011, "Astra", 2500.55, 42, "https://http2.mlstatic.com/D_NQ_NP_607839-MLA78069070590_082024-O.webp");
-    const repuesto6 = new Repuesto(6, 10000005, "Faro trasero conductor", 2011, "Astra", 450.55, 99, "https://http2.mlstatic.com/D_NQ_NP_622765-MLA70473923406_072023-O.webp");
-    const repuesto7 = new Repuesto(7, 10000006, "Faro trasero acompañante", 2011, "Astra", 450.55, 99, "https://http2.mlstatic.com/D_NQ_NP_851015-MLA76872952329_062024-O.webp");
-    const repuesto8 = new Repuesto(8, 10000007, "Puerta delantera acompañante", 2011, "Astra", 5000.75, 2, "https://http2.mlstatic.com/D_NQ_NP_2X_966711-MLA79026787319_092024-T.webp");
+    const repuesto5 = new Repuesto(5, 10000004, "Amortiguadores x 4", 2011, "Astra", 2500.55, 50, "https://http2.mlstatic.com/D_NQ_NP_607839-MLA78069070590_082024-O.webp");
+    const repuesto6 = new Repuesto(6, 10000005, "Faro trasero conductor", 2011, "Astra", 450.55, 100, "https://http2.mlstatic.com/D_NQ_NP_622765-MLA70473923406_072023-O.webp");
+    const repuesto7 = new Repuesto(7, 10000006, "Faro trasero acompañante", 2011, "Astra", 450.55, 100, "https://http2.mlstatic.com/D_NQ_NP_851015-MLA76872952329_062024-O.webp");
+    const repuesto8 = new Repuesto(8, 10000007, "Puerta delantera acompañante", 2011, "Astra", 5000.75, 100, "https://http2.mlstatic.com/D_NQ_NP_2X_966711-MLA79026787319_092024-T.webp");
     nuevaBDRepuestos = [repuesto1, repuesto2, repuesto3, repuesto4, repuesto5, repuesto6, repuesto7, repuesto8];
     return nuevaBDRepuestos;
 }

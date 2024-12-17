@@ -78,19 +78,19 @@ export async function crearContenidoModalFinalizarCarrito() {
                             <input type="text" class="form-control" id="nombreTarjeta" placeholder="Nombre completo" required>
                         </div>
                         <div class="mb-3">
-                            <label for="numeroTarjeta" class="form-label">Primeros 4 números de la Tarjeta</label>
+                            <label for="numeroTarjeta1" class="form-label">Primeros 4 números de la Tarjeta</label>
                             <input type="text" class="form-control" id="numeroTarjeta1" placeholder="XXXX" required>
                         </div>
                         <div class="mb-3">
-                            <label for="numeroTarjeta" class="form-label">Segundos 4 números de la Tarjeta</label>
+                            <label for="numeroTarjeta2" class="form-label">Segundos 4 números de la Tarjeta</label>
                             <input type="text" class="form-control" id="numeroTarjeta2" placeholder="XXXX" required>
                         </div>
-                                                <div class="mb-3">
-                            <label for="numeroTarjeta" class="form-label">Terceros 4 números de la Tarjeta</label>
+                            <div class="mb-3">
+                            <label for="numeroTarjeta3" class="form-label">Terceros 4 números de la Tarjeta</label>
                             <input type="text" class="form-control" id="numeroTarjeta3" placeholder="XXXX" required>
                         </div>
-                                                <div class="mb-3">
-                            <label for="numeroTarjeta" class="form-label">Cuartos 4 números de la Tarjeta</label>
+                            <div class="mb-3">
+                            <label for="numeroTarjeta4" class="form-label">Cuartos 4 números de la Tarjeta</label>
                             <input type="text" class="form-control" id="numeroTarjeta4" placeholder="XXXX" required>
                         </div>
                         <div class="row">

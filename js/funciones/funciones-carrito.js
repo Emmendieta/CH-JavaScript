@@ -46,24 +46,27 @@ export async function inicializarBDCarrito() {
 
 async function altaCarrito(carrito) {
     try {
-        if (await verificarExistenciaCarritoPendiente(carrito.codigoUsuario) === false) {
-            const maxCodigo = await obtenerCodigoMax() + 1;
-            const nuevoCarrito = new Carrito(
-                maxCodigo,
-                carrito.codigoUsuario,
-                carrito.listaRepuestos,
-                carrito.montoTotal,
-                carrito.finalizado
-            )
-            baseDeDatosCarrito.push(nuevoCarrito);
-            localStorage.setItem("baseDeDatosCarrito", JSON.stringify(baseDeDatosCarrito));
-            return true;
-        } else { 
+        //Recupero la base de datos actualizada desde localStorage:
+        let baseDeDatosCarrito = JSON.parse(localStorage.getItem("baseDeDatosCarrito")) || [];
+        //Verifico si el usuario tiene un carrito pendiente:
+        const carritoPendiente = baseDeDatosCarrito.find((carritoBD) => carritoBD.codigoUsuario === carrito.codigoUsuario && carritoBD.finalizado === false);
+        if (carritoPendiente) {
+            //Si ya existe un carrito pendiente, no se puede crear otro:
             errorSweetAlert2("Error: No se puede crear un nuevo carrito, ya que el usuario tiene uno pendiente!");
             return false;
         }
-    } catch (error) { errorSweetAlert2(`Error al tratar dar de alta al carrito ${carrito.codigo}! Error: ` + error); }
-    finally {}
+        //Si no hay carritos asociados al usuario, crear un nuevo carrito:
+        const maxCodigo = await obtenerCodigoMax() + 1;
+        const nuevoCarrito = new Carrito(maxCodigo, carrito.codigoUsuario, carrito.listaRepuestos || [],carrito.montoTotal || 0, false);
+        //Agrego el nuevo carrito a la BD:
+        baseDeDatosCarrito.push(nuevoCarrito);
+        //Guardo en el localStorage:
+        localStorage.setItem("baseDeDatosCarrito", JSON.stringify(baseDeDatosCarrito));
+        return true;
+    } catch (error) {
+        errorSweetAlert2(`Error al tratar de dar de alta el carrito ${carrito.codigoUsuario}! Error: ` + error);
+        return false;
+    }
 }
 
 // Verifico que el cliente no tenga ningun carrito pendiente:
@@ -72,8 +75,11 @@ async function verificarExistenciaCarritoPendiente(codigoUsuario) {
     try {
         const recuperarBD = await recuperarBDCarritos();
         if (codigoUsuario === NaN || codigoUsuario === null || codigoUsuario.length === 0) {errorSweetAlert2("Error: No se pudo recuperar la información del Usuario!");}
-        const verificarCarritoPendiente = recuperarBD.some((carrito) => String(carrito.codigoUsuario) === String(codigoUsuario));
-        if (verificarCarritoPendiente.finalizado === false) { return true; }
+        //Recupero todos los posibles carritos del usuario:
+        const carritosUsuario = recuperarBD.filter((carrito) => String(carrito.codigoUsuario) === String(codigoUsuario));
+        //Busco si tiene un carrito pendiente:
+        const carritoPendiente = carritosUsuario.find((carrito) => carrito.finalizado === false);
+        if (carritoPendiente) { return true; }
         else { return false; }
     } catch(error) { errorSweetAlert2("Error al tratar de verificar la Existencia de un carrito pendiente del usuario! Error: " + error);}
     finally {}
